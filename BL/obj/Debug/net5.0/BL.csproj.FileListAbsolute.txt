@@ -1,0 +1,17 @@
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\BL.csprojAssemblyReference.cache
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\BL.GeneratedMSBuildEditorConfig.editorconfig
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\BL.AssemblyInfoInputs.cache
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\BL.AssemblyInfo.cs
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\BL.csproj.CoreCompileInputs.cache
+F:\CODE\Project Semester 1\CODE\BL\bin\Debug\net5.0\BL.deps.json
+F:\CODE\Project Semester 1\CODE\BL\bin\Debug\net5.0\BL.dll
+F:\CODE\Project Semester 1\CODE\BL\bin\Debug\net5.0\ref\BL.dll
+F:\CODE\Project Semester 1\CODE\BL\bin\Debug\net5.0\BL.pdb
+F:\CODE\Project Semester 1\CODE\BL\bin\Debug\net5.0\DAL.dll
+F:\CODE\Project Semester 1\CODE\BL\bin\Debug\net5.0\Persistance.dll
+F:\CODE\Project Semester 1\CODE\BL\bin\Debug\net5.0\Persistance.pdb
+F:\CODE\Project Semester 1\CODE\BL\bin\Debug\net5.0\DAL.pdb
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\BL.csproj.CopyComplete
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\BL.dll
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\ref\BL.dll
+F:\CODE\Project Semester 1\CODE\BL\obj\Debug\net5.0\BL.pdb

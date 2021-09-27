@@ -1,0 +1,12 @@
+F:\CODE\Project Semester 1\CODE\Persistance\obj\Debug\net5.0\Persistance.csprojAssemblyReference.cache
+F:\CODE\Project Semester 1\CODE\Persistance\obj\Debug\net5.0\Persistance.GeneratedMSBuildEditorConfig.editorconfig
+F:\CODE\Project Semester 1\CODE\Persistance\obj\Debug\net5.0\Persistance.AssemblyInfoInputs.cache
+F:\CODE\Project Semester 1\CODE\Persistance\obj\Debug\net5.0\Persistance.AssemblyInfo.cs
+F:\CODE\Project Semester 1\CODE\Persistance\obj\Debug\net5.0\Persistance.csproj.CoreCompileInputs.cache
+F:\CODE\Project Semester 1\CODE\Persistance\bin\Debug\net5.0\Persistance.deps.json
+F:\CODE\Project Semester 1\CODE\Persistance\bin\Debug\net5.0\Persistance.dll
+F:\CODE\Project Semester 1\CODE\Persistance\bin\Debug\net5.0\ref\Persistance.dll
+F:\CODE\Project Semester 1\CODE\Persistance\bin\Debug\net5.0\Persistance.pdb
+F:\CODE\Project Semester 1\CODE\Persistance\obj\Debug\net5.0\Persistance.dll
+F:\CODE\Project Semester 1\CODE\Persistance\obj\Debug\net5.0\ref\Persistance.dll
+F:\CODE\Project Semester 1\CODE\Persistance\obj\Debug\net5.0\Persistance.pdb
