@@ -119,7 +119,11 @@ Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.Invoic
  select i.Invoices_ID, i.Invoices_Date, c.Tables_Name, i.Invoices_Status from
 Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices_Status > 1;
  
- select * from TableFood;
+ select md5('vtcapf13');
+ select md5('vtcapf14');
+ insert into Staffs(Username, Userpass, StaffName, role) values ('pf13', 'd4248dec94ac2cc3b378ad76ea8bea96', 'Admin', 2);
+ insert into Staffs(Username, Userpass, StaffName, role) values ('pf14', '2d24f14b4f6d8aeb67c948326b27a607', 'Admin2', 2);
+  select * from Staffs;
  
  select * from Invoice_details;
  select * from Invoice_details where InvoicesID_FK = 1;
@@ -127,7 +131,6 @@ Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices
  Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK = 1;
  
  select * from Category;
- 
  -- Item - category
  select i.Items_ID, i.Items_Name, i.Items_Price, c.Category_Name from
  Items i inner join Category c on i.CategoryID_FK = c.Category_ID;

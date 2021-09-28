@@ -9,7 +9,6 @@ namespace DAL
         public Staff Login(Staff staff)
         {
             Staff _staff = null;
-            // viet the nay moi chay dc nhieu test 1 luc
             lock (connection)
             {
                 try
@@ -34,6 +33,35 @@ namespace DAL
             }
             // Console.WriteLine(login);
             return _staff;
+        }
+        public int Insert(Staff staff)
+        {
+            int? result = null;
+            MySqlConnection connection = DBhelper.GetConnection();
+            string sql = @"insert into Staffs(StaffName, Username, Userpass, role) values 
+                      (@staffName, @userName, @userPass, @role);";
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@staffName", staff.StaffName);
+                    command.Parameters.AddWithValue("@userName", staff.Username);
+                    command.Parameters.AddWithValue("@userPass", staff.Userpass);
+                    command.Parameters.AddWithValue("@role", staff.Role);
+                    result = command.ExecuteNonQuery();
+                }
+                catch
+                {
+                    result = -2;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result ?? 0;
         }
         private Staff GetStaff(MySqlDataReader reader)
         {
