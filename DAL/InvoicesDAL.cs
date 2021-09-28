@@ -103,6 +103,74 @@ namespace DAL
             }
             return result;
         }
+        public bool AddmoreItem(List<Item> item, int id)
+        {
+            bool result2 = false;
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.Connection = connection;
+                    //lock all table
+                    command.CommandText = "lock tables TableFood write, Invoices write, Items write, Invoice_Details write;";
+                    command.ExecuteNonQuery();
+                    // transaction data
+                    MySqlTransaction transaction = connection.BeginTransaction();
+                    command.Transaction = transaction;
+                    MySqlDataReader reader = null;
+                    try
+                    {
+                        for (int i = 0; i < item.Count; i++)
+                        {
+                            if (item[i].ItemsID < 0 || item[i].Quantity < 0)
+                            {
+                                throw new Exception("Not Exists Item!");
+                            }
+                            //get Item(price)
+                            command.CommandText = "select Items_Price from Items where Items_ID=@Items_ID";
+                            command.Parameters.Clear();
+                            command.Parameters.AddWithValue("@Items_ID", item[i].ItemsID);
+                            reader = command.ExecuteReader();
+                            if (!reader.Read())
+                            {
+                                throw new Exception("Not Exists Item");
+                            }
+                            item[i].ItemPrice = reader.GetDecimal("Items_Price");
+                            reader.Close();
+                            //Insert to InvoiceDetail Table
+                            command.CommandText = @"insert into Invoice_details(InvoicesID_FK, ItemsID_FK, Items_Price, count) values 
+                            (" + id + ", " + item[i].ItemsID + ", " + item[i].ItemPrice + ", " + item[i].Quantity + ");";
+                            command.ExecuteNonQuery();
+                            id = reader.GetInt32("Invoices_ID");
+                            reader.Close();// alo
+                        }
+                        //commit transaction
+                        transaction.Commit();
+                        result2 = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch { }
+                    }
+                    finally
+                    {
+                        //unlock all tables;
+                        command.CommandText = "unlock tables;";
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception c) { Console.WriteLine(c); }
+                finally { connection.Close(); }
+            }
+            return result2;
+        }
         public Invoice GetInvoicesId(int id)
         {
             Invoice invoices = null;
@@ -211,7 +279,7 @@ namespace DAL
                 {
                     connection.Open();
                     query = @"select i.Invoices_ID, i.Invoices_Date, c.Tables_Name, i.Invoices_Status from
-                    Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices_Status = 2 and i.Invoices_ID = " + id + ";";
+                    Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices_Status > 1 and i.Invoices_ID = " + id + ";";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
@@ -264,7 +332,6 @@ namespace DAL
                     if (reader.Read())
                     {
                         tableId = reader.GetInt32("TableID_FK");
-                        Console.WriteLine("\n tableId =  " + tableId);
                         reader.Close();
                         query = $"update TableFood set Tables_Status = 1 where Tables_ID = " + tableId + ";";
                         command.CommandText = query;

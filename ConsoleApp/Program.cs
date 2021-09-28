@@ -303,7 +303,9 @@ namespace ConsoleApp
                 {
                     if (table.Status == 2)
                     {
-                        Console.WriteLine(" Table Invalid!");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Table is IN USE, cannot create order!");
+                        Console.ResetColor();
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -394,7 +396,7 @@ namespace ConsoleApp
             Console.WriteLine("{0," + position + "}\b{1}", "", title);
             Console.WriteLine();
             Console.WriteLine(line);
-            Console.WriteLine("  1. Show All Invoice\n  2. Show Invoice By ID\n  3. Exit to main menu");
+            Console.WriteLine("  1. Show All Invoice\n  2. Show Invoice By ID\n  3. Back to menu");
             Console.WriteLine(line);
             Console.WriteLine();
             Console.Write("  Your choice : ");
@@ -452,7 +454,7 @@ namespace ConsoleApp
                             Console.WriteLine("Function to do\n1. Payment\n2. Cancel Invoice\n3. Back to menu");
                             Console.Write("Your choice : ");
                             choosefunction = GetID();
-                            while (choosefunction < 1 || choosefunction > 3)
+                            while (choosefunction < 1 || choosefunction > 4)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write("Invalid input, re-enter : ");
@@ -464,68 +466,76 @@ namespace ConsoleApp
                                 case 1:
                                     Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
                                     answer1 = Console.ReadLine();
-                                    if (answer1 == "yes")
+                                    do
                                     {
-                                        bool result = invoicesBL.GetPayment(chooseinvoice);
-                                        if (result)
+                                        if (answer1 == "yes")
                                         {
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.WriteLine("Payment Complete!");
-                                            Console.ResetColor();
-                                            Console.Write("Press any key to continue...");
-                                            Console.ReadKey();
+                                            bool result = invoicesBL.GetPayment(chooseinvoice);
+                                            if (result)
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Green;
+                                                Console.WriteLine("Payment Complete!");
+                                                Console.ResetColor();
+                                                Console.Write("Press any key to continue...");
+                                                Console.ReadKey();
+                                            }
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Red;
+                                                Console.WriteLine("Payment Not Complete!");
+                                                Console.ResetColor();
+                                                Console.Write("Press any key to continue...");
+                                                Console.ReadKey();
+                                            }
+                                            break;
+                                        }
+                                        else if (answer1 == "no")
+                                        {
+                                            break;
                                         }
                                         else
                                         {
-                                            Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine("Payment Not Complete!");
-                                            Console.ResetColor();
-                                            Console.Write("Press any key to continue...");
-                                            Console.ReadKey();
+                                            Console.Write("Invalid input, re-enter : ");
+                                            answer1 = Console.ReadLine();
                                         }
-                                    }
-                                    else if (answer1 == "no")
-                                    {
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        Console.Write("Invalid input, re-enter : ");
-                                        answer1 = Console.ReadLine();
-                                    }
+                                    } while (answer1 != "no");
                                     break;
                                 case 2:
                                     Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
                                     answer2 = Console.ReadLine();
-                                    if (answer2 == "yes")
+                                    do
                                     {
-                                        bool result = invoicesBL.GetCancelInvoice(chooseinvoice);
-                                        if (result)
+                                        if (answer2 == "yes")
                                         {
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.WriteLine("Cancel Invoice Complete!");
-                                            Console.ResetColor();
-                                            Console.Write("Press any key to continue...");
-                                            Console.ReadKey();
+                                            bool result = invoicesBL.GetCancelInvoice(chooseinvoice);
+                                            if (result)
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Green;
+                                                Console.WriteLine("Cancel Invoice Complete!");
+                                                Console.ResetColor();
+                                                Console.Write("Press any key to continue...");
+                                                Console.ReadKey();
+                                            }
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Red;
+                                                Console.WriteLine("Cancel Invoice Fail!");
+                                                Console.ResetColor();
+                                                Console.Write("Press any key to continue...");
+                                                Console.ReadKey();
+                                            }
+                                            break;
+                                        }
+                                        else if (answer2 == "no")
+                                        {
+                                            break;
                                         }
                                         else
                                         {
-                                            Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine("Cancel Invoice Fail!");
-                                            Console.ResetColor();
-                                            Console.Write("Press any key to continue...");
-                                            Console.ReadKey();
+                                            Console.Write("Invalid input, re-enter : ");
+                                            answer2 = Console.ReadLine();
                                         }
-                                    }
-                                    else if (answer2 == "no")
-                                    {
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        Console.Write("Invalid input, re-enter : ");
-                                        answer2 = Console.ReadLine();
-                                    }
+                                    } while (answer2 != "no");
                                     break;
                                 case 3:
                                     break;
@@ -542,7 +552,7 @@ namespace ConsoleApp
                     if (invoice2 == null)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("Invalid Invoice, re-enter : ");
+                        Console.Write("Nothing to show!, re-enter : ");
                         Console.ResetColor();
                         chooseidinvoice = GetID();
                     }
@@ -559,7 +569,7 @@ namespace ConsoleApp
                         Console.WriteLine("Function to do\n1. Payment\n2. Cancel Invoice\n3. Back to menu");
                         Console.Write("Your choice : ");
                         choosefunctionid = GetID();
-                        while (choosefunctionid < 1 || choosefunctionid > 3)
+                        while (choosefunctionid < 1 || choosefunctionid > 4)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write("Invalid input, re-enter : ");
@@ -571,68 +581,76 @@ namespace ConsoleApp
                             case 1:
                                 Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
                                 answer3 = Console.ReadLine();
-                                if (answer3 == "yes")
+                                do
                                 {
-                                    bool result = invoicesBL.GetPayment(chooseidinvoice);
-                                    if (result)
+                                    if (answer3 == "yes")
                                     {
-                                        Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine("Payment Complete!");
-                                        Console.ResetColor();
-                                        Console.Write("Press any key to continue...");
-                                        Console.ReadKey();
+                                        bool result = invoicesBL.GetPayment(chooseidinvoice);
+                                        if (result)
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("Payment Complete!");
+                                            Console.ResetColor();
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
+                                        else
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.WriteLine("Payment Not Complete!");
+                                            Console.ResetColor();
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
+                                        break;
+                                    }
+                                    else if (answer3 == "no")
+                                    {
+                                        break;
                                     }
                                     else
                                     {
-                                        Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine("Payment Not Complete!");
-                                        Console.ResetColor();
-                                        Console.Write("Press any key to continue...");
-                                        Console.ReadKey();
+                                        Console.Write("Invalid input, re-enter : ");
+                                        answer3 = Console.ReadLine();
                                     }
-                                }
-                                else if (answer3 == "no")
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.Write("Invalid input, re-enter : ");
-                                    answer3 = Console.ReadLine();
-                                }
+                                } while (answer3 != "no");
                                 break;
                             case 2:
                                 Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
                                 answer4 = Console.ReadLine();
-                                if (answer4 == "yes")
+                                do
                                 {
-                                    bool result = invoicesBL.GetCancelInvoice(chooseidinvoice);
-                                    if (result)
+                                    if (answer4 == "yes")
                                     {
-                                        Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine("Cancel Invoice Complete!");
-                                        Console.ResetColor();
-                                        Console.Write("Press any key to continue...");
-                                        Console.ReadKey();
+                                        bool result = invoicesBL.GetCancelInvoice(chooseidinvoice);
+                                        if (result)
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("Cancel Invoice Complete!");
+                                            Console.ResetColor();
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
+                                        else
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.WriteLine("Cancel Invoice Fail!");
+                                            Console.ResetColor();
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
+                                        break;
+                                    }
+                                    else if (answer4 == "no")
+                                    {
+                                        break;
                                     }
                                     else
                                     {
-                                        Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine("Cancel Invoice Fail!");
-                                        Console.ResetColor();
-                                        Console.Write("Press any key to continue...");
-                                        Console.ReadKey();
+                                        Console.Write("Invalid input, re-enter : ");
+                                        answer4 = Console.ReadLine();
                                     }
-                                }
-                                else if (answer4 == "no")
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    Console.Write("Invalid input, re-enter : ");
-                                    answer4 = Console.ReadLine();
-                                }
+                                } while (answer4 != "no");
                                 break;
                             case 3:
                                 break;

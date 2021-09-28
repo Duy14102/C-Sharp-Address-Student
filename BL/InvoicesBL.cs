@@ -36,5 +36,10 @@ namespace BL
         {
             return invoicesDAL.GetCancelInvoice(id);
         }
+        public bool AddmoreItem(List<Item> items, int id)
+        {
+            bool result2 = invoicesDAL.AddmoreItem(items, id);
+            return result2;
+        }
     }
 }

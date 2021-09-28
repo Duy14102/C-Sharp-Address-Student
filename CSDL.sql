@@ -168,7 +168,6 @@ where Items_Name like concat('%',@Items_Name,'%');
 
 select LAST_INSERT_ID();
 
-update TableFood set Tables_Status = 2 where Tables_ID =1;
 select * from TableFood;
  
  select * from TableFood where Tables_Status = 2;
