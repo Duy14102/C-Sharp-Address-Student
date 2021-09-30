@@ -110,6 +110,8 @@ Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.Invoic
  select TableID_FK from Invoices where Invoices_ID = 1;
  update TableFood set Tables_Status = 1 where Tables_ID = 4;
  
+ select * from Items;
+ 
  select * from Invoices;
  select * from Invoices where TableID_FK = 1;
  select * from Invoices where TableID_FK = 2;
@@ -121,6 +123,7 @@ Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices
  
  select md5('vtcapf13');
  select md5('vtcapf14');
+ select md5('VTCAcademy');
  insert into Staffs(Username, Userpass, StaffName, role) values ('pf13', 'd4248dec94ac2cc3b378ad76ea8bea96', 'Admin', 2);
  insert into Staffs(Username, Userpass, StaffName, role) values ('pf14', '2d24f14b4f6d8aeb67c948326b27a607', 'Admin2', 2);
   select * from Staffs;
@@ -129,6 +132,10 @@ Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices
  select * from Invoice_details where InvoicesID_FK = 1;
  select c.Items_Name, c.Items_Price, i.count from 
  Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK = 1;
+ update Invoice_details set count = count + 1 where InvoicesID_FK = 1 and ItemsID_FK = 1;
+ select i.ItemsID_FK, c.Items_Name, c.Items_Price, i.count from 
+Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK = 1;
+ 
  
  select * from Category;
  -- Item - category

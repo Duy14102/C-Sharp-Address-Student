@@ -48,7 +48,7 @@ namespace DAL
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@staffName", staff.StaffName);
                     command.Parameters.AddWithValue("@userName", staff.Username);
-                    command.Parameters.AddWithValue("@userPass", staff.Userpass);
+                    command.Parameters.AddWithValue("@userPass", MD5.CreateMD5(staff.Userpass));
                     command.Parameters.AddWithValue("@role", staff.Role);
                     result = command.ExecuteNonQuery();
                 }

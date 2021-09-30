@@ -12,16 +12,14 @@ namespace DALtest
         [Fact]
         public void LoginTest1()
         {
-            staff.Username = "pf13";
-            staff.Userpass = "vtcapf13";
+            staff.Username = "staffpf13";
+            staff.Userpass = "staff1234";
             int expected = 1;
             int result = staffDAL.Login(staff).Role;
             Assert.True(expected == result);
         }
         [Theory]
         [InlineData("pf13", "vtcapf13", 2)]
-        [InlineData("pf131", "PF13VTCAcademy", 0)]
-        [InlineData("pf13", "PF13VTCAcademysdf", 0)]
         [InlineData("pf14", "vtcapf14", 2)]
         public void LoginTest2(string userName, string pass, int expected)
         {
@@ -31,9 +29,9 @@ namespace DALtest
             Assert.True(expected == result);
         }
         [Theory]
-        [InlineData("VTCA1", "VTCA1", "VTCAcademy", 1, 0)]
-        [InlineData("VTCA2", "VTCA2", "VTCAcademy", 2, 0)]
-        [InlineData("VTCA3", "VTCA3", "VTCAcademy", 2, 0)]
+        [InlineData("VTCA1", "VTCA1", "VTCAcademy1", 1, 0)]
+        [InlineData("VTCA2", "VTCA2", "VTCAcademy2", 2, 0)]
+        [InlineData("VTCA3", "VTCA3", "VTCAcademy3", 2, 0)]
         public void InsertTest1(string staffName, string userName, string pass, int role, int expected)
         {
             staff.StaffName = staffName;

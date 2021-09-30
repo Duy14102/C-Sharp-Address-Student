@@ -23,7 +23,11 @@ namespace BL
         }
         public List<Item> GetByName(string name)
         {
-            return itemDAL.GetByName(new Item{ItemName = name});
+            return itemDAL.GetByName(new Item { ItemName = name });
+        }
+        public List<Item> GetDisplayMenu()
+        {
+            return itemDAL.GetDisplayMenu();
         }
     }
 }

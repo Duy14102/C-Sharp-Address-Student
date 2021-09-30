@@ -103,74 +103,6 @@ namespace DAL
             }
             return result;
         }
-        public bool AddmoreItem(List<Item> item, int id)
-        {
-            bool result2 = false;
-            lock (connection)
-            {
-                try
-                {
-                    connection.Open();
-                    MySqlCommand command = connection.CreateCommand();
-                    command.Connection = connection;
-                    //lock all table
-                    command.CommandText = "lock tables TableFood write, Invoices write, Items write, Invoice_Details write;";
-                    command.ExecuteNonQuery();
-                    // transaction data
-                    MySqlTransaction transaction = connection.BeginTransaction();
-                    command.Transaction = transaction;
-                    MySqlDataReader reader = null;
-                    try
-                    {
-                        for (int i = 0; i < item.Count; i++)
-                        {
-                            if (item[i].ItemsID < 0 || item[i].Quantity < 0)
-                            {
-                                throw new Exception("Not Exists Item!");
-                            }
-                            //get Item(price)
-                            command.CommandText = "select Items_Price from Items where Items_ID=@Items_ID";
-                            command.Parameters.Clear();
-                            command.Parameters.AddWithValue("@Items_ID", item[i].ItemsID);
-                            reader = command.ExecuteReader();
-                            if (!reader.Read())
-                            {
-                                throw new Exception("Not Exists Item");
-                            }
-                            item[i].ItemPrice = reader.GetDecimal("Items_Price");
-                            reader.Close();
-                            //Insert to InvoiceDetail Table
-                            command.CommandText = @"insert into Invoice_details(InvoicesID_FK, ItemsID_FK, Items_Price, count) values 
-                            (" + id + ", " + item[i].ItemsID + ", " + item[i].ItemPrice + ", " + item[i].Quantity + ");";
-                            command.ExecuteNonQuery();
-                            id = reader.GetInt32("Invoices_ID");
-                            reader.Close();// alo
-                        }
-                        //commit transaction
-                        transaction.Commit();
-                        result2 = true;
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        try
-                        {
-                            transaction.Rollback();
-                        }
-                        catch { }
-                    }
-                    finally
-                    {
-                        //unlock all tables;
-                        command.CommandText = "unlock tables;";
-                        command.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception c) { Console.WriteLine(c); }
-                finally { connection.Close(); }
-            }
-            return result2;
-        }
         public Invoice GetInvoicesId(int id)
         {
             Invoice invoices = null;
@@ -187,13 +119,14 @@ namespace DAL
                     {
                         invoices = GetInvoice(reader);
                         reader.Close();
-                        query = @"select c.Items_Name, c.Items_Price, i.count from 
+                        query = @"select i.ItemsID_FK, c.Items_Name, c.Items_Price, i.count from 
                                 Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK = " + id + ";";
                         command.CommandText = query;
                         reader = command.ExecuteReader();
                         while (reader.Read())
                         {
                             Item item = new Item();
+                            item.ItemsID = reader.GetInt32("ItemsID_FK");
                             item.ItemName = reader.GetString("Items_Name");
                             item.ItemPrice = reader.GetDecimal("Items_Price");
                             item.Quantity = reader.GetInt32("count");
@@ -263,8 +196,9 @@ namespace DAL
                     reader.Close();
                     connection.Close();
                 }
-                catch
+                catch (Exception e)
                 {
+                    Console.WriteLine(e);
                 }
             }
             if (invoices.Count == 0) invoices = null;
@@ -304,7 +238,6 @@ namespace DAL
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    Console.ReadKey();
                 }
                 finally
                 {
@@ -353,7 +286,6 @@ namespace DAL
                 {
                     connection.Open();
                     query = $"update Invoices set Invoices_Status = 3 where Invoices_ID = " + id + ";";
-                    Console.WriteLine("\n invoice id =  " + id);
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.ExecuteNonQuery();
                     query = $"select TableID_FK from Invoices where Invoices_ID = " + id + ";";
@@ -363,7 +295,6 @@ namespace DAL
                     if (reader.Read())
                     {
                         tableId = reader.GetInt32("TableID_FK");
-                        Console.WriteLine("\n tableId =  " + tableId);
                         reader.Close();
                         query = $"update TableFood set Tables_Status = 1 where Tables_ID = " + tableId + ";";
                         command.CommandText = query;
@@ -375,6 +306,116 @@ namespace DAL
                 catch (Exception e) { Console.WriteLine(e); }
                 return result;
             }
+        }
+        public bool UpdateQuantityItem(int itemId, int id, int count)
+        {
+            bool result = false;
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    query = "update Invoice_details set count = count + " + count + " where InvoicesID_FK = '" + id + "'and ItemsID_FK = '" + itemId + "';";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
+        public bool UpdateItemNew(int id, int itemId, int count)
+        {
+            bool result = false;
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    // lock all table
+                    query = "lock tables TableFood write, Invoices write, Items write, Invoice_Details write;";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                    // transaction data
+                    MySqlTransaction transaction = connection.BeginTransaction();
+                    command.Transaction = transaction;
+                    command.ExecuteNonQuery();
+                    decimal Price;
+                    try
+                    {
+                        query = "select Items_Price from Items where Items_ID= " + itemId + ";";
+                        command.CommandText = query;
+                        MySqlDataReader reader = command.ExecuteReader();
+                        if (!reader.Read())
+                        {
+                            throw new Exception("Not Exists Item");
+                        }
+                        Price = reader.GetDecimal("Items_Price");
+                        reader.Close();
+                        query = @"insert into Invoice_details(InvoicesID_FK, ItemsID_FK, Items_Price, count) values 
+                            (" + id + ", " + itemId + ", " + Price + ", " + count + ");";
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                        transaction.Commit();
+                        result = true;
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                    }
+                    finally
+                    {
+                        //unlock all tables;
+                        command.CommandText = "unlock tables;";
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally { connection.Close(); }
+            }
+            return result;
+        }
+        public bool removeitem(int id)
+        {
+            bool result = false;
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    query = "delete from Invoice_details where ItemsID_FK = " + id + ";";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result;
         }
         private Invoice GetInvoice(MySqlDataReader reader)
         {

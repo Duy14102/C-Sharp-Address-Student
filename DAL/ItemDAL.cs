@@ -31,6 +31,28 @@ namespace DAL
             }
             return items;
         }
+        public List<Item> GetDisplayMenu()
+        {
+            List<Item> items = new List<Item>();
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    query = @"select * from Items;";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        items.Add(GetItem(reader));
+                    }
+                    reader.Close();
+                    connection.Close();
+                }
+                catch { }
+            }
+            return items;
+        }
         public Item GetById(int id)
         {
             Item item = null;
