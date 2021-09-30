@@ -120,28 +120,6 @@ namespace DAL
             }
             return result;
         }
-        public TableFood TableTest(TableFood tableFood)
-        {
-            TableFood table = null;
-            lock (connection)
-            {
-                try
-                {
-                    connection.Open();
-                    MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "select * from TableFood where Tables_Name ='" + tableFood.Name + "';";
-                    MySqlDataReader reader = command.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        table = GetTableFood(reader);
-                    }
-                    reader.Close();
-                    connection.Close();
-                }
-                catch { }
-            }
-            return table;
-        }
         internal TableFood GetTableFood(MySqlDataReader reader)
         {
             TableFood table = new TableFood();

@@ -5,16 +5,16 @@ using DAL;
 
 namespace DALtest
 {
-    public class TableFoodDALtest
+    public class ItemDALtest
     {
-        private TableFoodDAL tableFoodDAL = new TableFoodDAL();
-        private TableFood tableFood = new TableFood();
+        private ItemDAL itemDAL = new ItemDAL();
+        private Item item = new Item();
         [Fact]
         public void LoginTest1()
         {
             int id = 1;
-            tableFood.TableId = id;
-            int result = tableFoodDAL.GetById(id).TableId;
+            item.ItemsID = id;
+            int result = itemDAL.GetById(id).ItemsID;
             Assert.True(id == result);
         }
         [Theory]
@@ -27,9 +27,12 @@ namespace DALtest
         [InlineData(8)]
         [InlineData(9)]
         [InlineData(10)]
+        [InlineData(11)]
+        [InlineData(12)]
+        [InlineData(13)]
         public void LoginTest2(int id)
         {
-            int result = tableFoodDAL.GetById(id).TableId;
+            int result = itemDAL.GetById(id).ItemsID;
             Assert.True(id == result);
         }
     }

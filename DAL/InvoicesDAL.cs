@@ -119,7 +119,7 @@ namespace DAL
                     {
                         invoices = GetInvoice(reader);
                         reader.Close();
-                        query = @"select i.ItemsID_FK, c.Items_Name, c.Items_Price, i.count from 
+                        query = @"select i.InvoicesID_FK, i.ItemsID_FK, c.Items_Name, c.Items_Price, i.count from 
                                 Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK = " + id + ";";
                         command.CommandText = query;
                         reader = command.ExecuteReader();
@@ -416,6 +416,33 @@ namespace DAL
                 }
             }
             return result;
+        }
+        public int InsertTest(Invoice invoice)
+        {
+            int? result = null;
+            MySqlConnection connection = DBhelper.GetConnection();
+            string sql = @"insert into Invoices(TableID_FK, Invoice_Status) values 
+                      (@tableid, @invoicestatus);";
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@tableid", invoice.table.TableId);
+                    command.Parameters.AddWithValue("@invoicestatus", invoice.Invoices_Status);
+                    result = command.ExecuteNonQuery();
+                }
+                catch
+                {
+                    result = -2;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result ?? 0;
         }
         private Invoice GetInvoice(MySqlDataReader reader)
         {
