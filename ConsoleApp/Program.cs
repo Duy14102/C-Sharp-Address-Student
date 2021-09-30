@@ -133,16 +133,16 @@ namespace ConsoleApp
                 }
                 else
                 {
-                    string lined = "+--------------------------------------------------------------------+";
+                    string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
                     Console.Clear();
                     Console.WriteLine(lined);
-                    Console.WriteLine("|\t\t\tInvoice {0} History\t\t\t     |", choosehistory);
+                    Console.WriteLine("│\t\t\t\tInvoice {0} History\t\t\t   │", choosehistory);
                     Console.WriteLine(lined);
-                    Console.WriteLine("| {0,-20} | {1,-10} | {2,-15} | {3,-12} |", "Name", "Price", "Amount", "TotalPrice");
+                    Console.WriteLine("│ {0,-5} │ {1,-23} │ {2,-10} │ {3,-10} │ {4,-12} │", "Id", "Name", "Price", "Amount", "TotalPrice");
                     Console.WriteLine(lined);
                     for (int i = 0; i < invoice.Items.Count; i++)
                     {
-                        Console.WriteLine("| {0,-20} | {1,-10} | {2,-15} | {3,-12} |", invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
+                        Console.WriteLine("│ {0,-5} │ {1,-23} │ {2,-10} │ {3,-10} │ {4,-12} │", invoice.Items[i].ItemsID, invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
                         Console.WriteLine(lined);
                     }
                     Console.WriteLine("Press any key to back to menu...");
@@ -152,7 +152,7 @@ namespace ConsoleApp
         }
         static void MenuManagement(Staff staff)
         {
-            int chooseit, page;
+            int chooseit;
             Console.Clear();
             string line = "============================================================";
             string title = "MENU MANAGEMENT";
@@ -177,35 +177,57 @@ namespace ConsoleApp
             switch (chooseit)
             {
                 case 1:
-                    List<Category> categories = new List<Category>();
-                    Category category = new Category();
-                    Item item = new Item();
                     Console.Clear();
-                    Console.Write("Name of new item : ");
-                    item.ItemName = Console.ReadLine();
-                    Console.Write("Price of new item : ");
-                    item.ItemPrice = decimal.Parse(Console.ReadLine());
-                    categories = categoryBL.GetAllCategory();
-                    DisplayCategory(categories);
-                    Console.Write("Your choice : ");
-                    int categoryitem = Getidover0();
-                    category = categoryBL.GetCategoryById(categoryitem);
-                    while (category == null)
+                    Console.Write("Are you sure you want to add item ? (yes/no) : ");
+                    string tookit = Console.ReadLine();
+                    do
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Category Not found!");
-                        Console.ResetColor();
-                        Console.Write("Try Again : ");
-                        categoryitem = Getidover0();
-                        category = categoryBL.GetCategoryById(categoryitem);
-                    }
-                    item.CategoryInfo = category;
-                    Console.WriteLine("ItemId : " + itemBL.AddItem(item));
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Add Item Successfully!");
-                    Console.ResetColor();
-                    Console.Write("Press any key to continue...");
-                    Console.ReadKey();
+                        if (tookit == "yes")
+                        {
+                            List<Category> categories = new List<Category>();
+                            Category category = new Category();
+                            Item item = new Item();
+                            Console.Clear();
+                            Console.Write("Name of new item : ");
+                            item.ItemName = Console.ReadLine();
+                            Console.Write("Price of new item : ");
+                            item.ItemPrice = decimal.Parse(Console.ReadLine());
+                            categories = categoryBL.GetAllCategory();
+                            DisplayCategory(categories);
+                            Console.Write("Your choice : ");
+                            int categoryitem = Getidover0();
+                            category = categoryBL.GetCategoryById(categoryitem);
+                            while (category == null)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Category Not found!");
+                                Console.ResetColor();
+                                Console.Write("Try Again : ");
+                                categoryitem = Getidover0();
+                                category = categoryBL.GetCategoryById(categoryitem);
+                            }
+                            item.CategoryInfo = category;
+                            itemBL.AddItem(item);
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Add Item Successfully!");
+                            Console.ResetColor();
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        }
+                        else if (tookit == "no")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Invalid input, re-enter : ");
+                            Console.ResetColor();
+                            tookit = Console.ReadLine();
+                        }
+                    } while (tookit != "no");
                     break;
                 case 2:
                     Console.Clear();
@@ -215,6 +237,7 @@ namespace ConsoleApp
                     Item itemId = itemBL.GetById(id);
                     if (itemId == null)
                     {
+                        Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Item Not Found!");
                         Console.ResetColor();
@@ -223,9 +246,17 @@ namespace ConsoleApp
                     }
                     else
                     {
-                        Console.WriteLine("Item Name : " + itemId.ItemName);
-                        Console.WriteLine("Item Price : " + itemId.ItemPrice);
-                        Console.WriteLine("Category : " + itemId.CategoryInfo.CategoryName);
+                        Console.Clear();
+                        string linet = "┼───────────────────────────────────────────────────────────────────────┼";
+                        string titlet = "MENU";
+                        int positiont = linet.Length / 2 - titlet.Length / 2;
+                        Console.WriteLine(linet);
+                        Console.WriteLine("│{0," + positiont + "}\b{1}\t\t\t\t\t│", "", titlet);
+                        Console.WriteLine(linet);
+                        Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price", "Category");
+                        Console.WriteLine(linet);
+                        Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3, -15} │", itemId.ItemsID, itemId.ItemName, itemId.ItemPrice, itemId.CategoryInfo.CategoryName);
+                        Console.WriteLine(linet);
                         Console.Write("Press any key to back to main menu...");
                         Console.ReadKey();
                     }
@@ -239,6 +270,7 @@ namespace ConsoleApp
                     items1 = itemBL.GetByName(name);
                     if (items1 == null)
                     {
+                        Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Item Not Found!");
                         Console.ResetColor();
@@ -247,6 +279,7 @@ namespace ConsoleApp
                     }
                     else
                     {
+                        Console.Clear();
                         DisplayItem(items1);
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
@@ -264,59 +297,9 @@ namespace ConsoleApp
                     }
                     else
                     {
-                        do
-                        {
-                            DisplayItem(items);
-                            Console.Write("Input 0 to back to menu or input number over 0 to view page : ");
-                            page = GetID();
-                            if (page == 0) break;
-                            else if (page == 2)
-                            {
-                                Console.Clear();
-                                string lined = "┼───────────────────────────────────────────────────────────────────────┼";
-                                string titles = "MENU";
-                                int positions = lined.Length / 2 - title.Length / 2;
-                                Console.WriteLine(lined);
-                                Console.WriteLine("│{0," + positions + "}\b{1}\t\t\t\t\t│", "", titles);
-                                Console.WriteLine(lined);
-                                Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price", "Category");
-                                Console.WriteLine(lined);
-                                for (int j = 10; j < items.Count; j++)
-                                {
-                                    Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3, -15} │", items[j].ItemsID, items[j].ItemName, items[j].ItemPrice, items[j].CategoryInfo.CategoryName);
-                                    Console.WriteLine(lined);
-                                }
-                                Console.Write("Press any key to continue...");
-                                Console.ReadKey();
-                            }
-                            else if (page == 3)
-                            {
-                                Console.Clear();
-                                string lined = "┼───────────────────────────────────────────────────────────────────────┼";
-                                string titles = "MENU";
-                                int positions = lined.Length / 2 - title.Length / 2;
-                                Console.WriteLine(lined);
-                                Console.WriteLine("│{0," + positions + "}\b{1}\t\t\t\t\t│", "", titles);
-                                Console.WriteLine(lined);
-                                Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price", "Category");
-                                Console.WriteLine(lined);
-                                for (int j = 20; j < items.Count; j++)
-                                {
-                                    Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3, -15} │", items[j].ItemsID, items[j].ItemName, items[j].ItemPrice, items[j].CategoryInfo.CategoryName);
-                                    Console.WriteLine(lined);
-                                }
-                                Console.Write("Press any key to continue...");
-                                Console.ReadKey();
-                            }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Page {0} not exists!", page);
-                                Console.ResetColor();
-                                Console.Write("Re-enter : ");
-                                page = GetID();
-                            }
-                        } while (page != 0);
+                        DisplayItem(items);
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
                     }
                     break;
                 case 5:
@@ -361,6 +344,7 @@ namespace ConsoleApp
                 TableFood table = tableBL.GetById(choosetable);
                 if (table == null)
                 {
+                    Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(" Table Id Invalid!");
                     Console.ResetColor();
@@ -371,6 +355,7 @@ namespace ConsoleApp
                 {
                     if (table.Status == 2)
                     {
+                        Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Table is IN USE, cannot create order!");
                         Console.ResetColor();
@@ -379,12 +364,13 @@ namespace ConsoleApp
                     }
                     else
                     {
+                        Console.Clear();
                         invoice.table = table;
                         items = itemBL.GetItems();
                         DisplayItem(items);
                         while (true)
                         {
-                            Console.Write("Input ID to add dishes or input 0 to back to menu : ");
+                            Console.Write("Input ID to add dishes and input 0 to finish order : ");
                             choosedishes = GetID();
                             if (choosedishes == 0) break;
                             Item item = itemBL.GetById(choosedishes);
@@ -432,6 +418,7 @@ namespace ConsoleApp
                         bool result = invoicesBL.CreateInvoice(invoice);
                         if (result)
                         {
+                            Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Create Order Successfully!");
                             Console.ResetColor();
@@ -440,6 +427,7 @@ namespace ConsoleApp
                         }
                         else
                         {
+                            Console.Clear();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Create Order Fail!");
                             Console.ResetColor();
@@ -511,7 +499,7 @@ namespace ConsoleApp
                             string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
                             Console.Clear();
                             Console.WriteLine(lined);
-                            Console.WriteLine("│\t\t\t    Invoice {0} Infomation\t\t\t   │", chooseinvoice);
+                            Console.WriteLine("│\t\t\t          Order {0}            \t\t\t   │", chooseinvoice);
                             Console.WriteLine(lined);
                             Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
                             Console.WriteLine(lined);
@@ -545,6 +533,7 @@ namespace ConsoleApp
                                             bool resultpayment = invoicesBL.GetPayment(chooseinvoice);
                                             if (resultpayment)
                                             {
+                                                Console.Clear();
                                                 Console.ForegroundColor = ConsoleColor.Green;
                                                 Console.WriteLine("Payment Complete!");
                                                 Console.ResetColor();
@@ -583,6 +572,7 @@ namespace ConsoleApp
                                             bool resultcancel = invoicesBL.GetCancelInvoice(chooseinvoice);
                                             if (resultcancel)
                                             {
+                                                Console.Clear();
                                                 Console.ForegroundColor = ConsoleColor.Green;
                                                 Console.WriteLine("Cancel Invoice Complete!");
                                                 Console.ResetColor();
@@ -622,6 +612,7 @@ namespace ConsoleApp
                                         Item item = itemBL.GetById(choosedishes);
                                         if (item == null)
                                         {
+                                            Console.Clear();
                                             Console.ForegroundColor = ConsoleColor.Red;
                                             Console.WriteLine(" Dishes Id Invalid!");
                                             Console.ResetColor();
@@ -687,6 +678,7 @@ namespace ConsoleApp
                                     Item item2 = itemBL.GetById(removeid);
                                     if (item2 == null)
                                     {
+                                        Console.Clear();
                                         Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine(" Dishes Id Invalid!");
                                         Console.ResetColor();
@@ -698,6 +690,7 @@ namespace ConsoleApp
                                         bool make = invoicesBL.removeitem(removeid);
                                         if (make)
                                         {
+                                            Console.Clear();
                                             Console.ForegroundColor = ConsoleColor.Green;
                                             Console.WriteLine("Remove Complete!");
                                             Console.ResetColor();
@@ -738,7 +731,7 @@ namespace ConsoleApp
                         string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
                         Console.Clear();
                         Console.WriteLine(lined);
-                        Console.WriteLine("│\t\t\t    Invoice {0} Infomation\t\t\t   │", chooseidinvoice);
+                        Console.WriteLine("│\t\t\t          Order {0}            \t\t\t   │", chooseidinvoice);
                         Console.WriteLine(lined);
                         Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
                         Console.WriteLine(lined);
@@ -772,6 +765,7 @@ namespace ConsoleApp
                                         bool result = invoicesBL.GetPayment(chooseidinvoice);
                                         if (result)
                                         {
+                                            Console.Clear();
                                             Console.ForegroundColor = ConsoleColor.Green;
                                             Console.WriteLine("Payment Complete!");
                                             Console.ResetColor();
@@ -810,6 +804,7 @@ namespace ConsoleApp
                                         bool result = invoicesBL.GetCancelInvoice(chooseidinvoice);
                                         if (result)
                                         {
+                                            Console.Clear();
                                             Console.ForegroundColor = ConsoleColor.Green;
                                             Console.WriteLine("Cancel Invoice Complete!");
                                             Console.ResetColor();
@@ -849,6 +844,7 @@ namespace ConsoleApp
                                     Item item = itemBL.GetById(choosedishes);
                                     if (item == null)
                                     {
+                                        Console.Clear();
                                         Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine(" Dishes Id Invalid!");
                                         Console.ResetColor();
@@ -914,6 +910,7 @@ namespace ConsoleApp
                                 Item item2 = itemBL.GetById(removeid);
                                 if (item2 == null)
                                 {
+                                    Console.Clear();
                                     Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine(" Dishes Id Invalid!");
                                     Console.ResetColor();
@@ -925,6 +922,7 @@ namespace ConsoleApp
                                     bool make = invoicesBL.removeitem(removeid);
                                     if (make)
                                     {
+                                        Console.Clear();
                                         Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine("Remove Complete!");
                                         Console.ResetColor();
@@ -963,7 +961,7 @@ namespace ConsoleApp
             Console.WriteLine(line);
             Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", "ID", "Name", "Status");
             Console.WriteLine(line);
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < tables.Count; i++)
             {
                 status = tables[i].Status == TableFood.READY_STATUS ? "Ready" : "In Use";
                 Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", tables[i].TableId, tables[i].Name, status);
@@ -975,7 +973,7 @@ namespace ConsoleApp
             Console.Clear();
             string status;
             string line = "┼──────────────────────────────────────────────────────────────────┼";
-            string title = "INVOICES";
+            string title = "LIST ORDER";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t\t   │", "", title);
@@ -1057,7 +1055,7 @@ namespace ConsoleApp
             Console.WriteLine(line);
             Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price", "Category");
             Console.WriteLine(line);
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < items.Count; i++)
             {
                 Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3, -15} │", items[i].ItemsID, items[i].ItemName, items[i].ItemPrice, items[i].CategoryInfo.CategoryName);
                 Console.WriteLine(line);

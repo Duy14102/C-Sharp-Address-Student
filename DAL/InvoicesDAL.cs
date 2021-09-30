@@ -220,13 +220,14 @@ namespace DAL
                     {
                         invoices = GetInvoice(reader);
                         reader.Close();
-                        query = @"select c.Items_Name, c.Items_Price, i.count from 
+                        query = @"select i.ItemsID_FK, c.Items_Name, c.Items_Price, i.count from 
                                 Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK = " + id + ";";
                         command.CommandText = query;
                         reader = command.ExecuteReader();
                         while (reader.Read())
                         {
                             Item item = new Item();
+                            item.ItemsID = reader.GetInt32("ItemsID_FK");
                             item.ItemName = reader.GetString("Items_Name");
                             item.ItemPrice = reader.GetDecimal("Items_Price");
                             item.Quantity = reader.GetInt32("count");
