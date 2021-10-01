@@ -52,6 +52,32 @@ namespace DAL
             }
             return category;
         }
+        public int InsertTest(Category category)
+        {
+            int? result = null;
+            MySqlConnection connection = DBhelper.GetConnection();
+            string sql = @"insert into Category(Category_Name) values 
+                      (@catename);";
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@catename", category.CategoryName);
+                    // result = command.ExecuteNonQuery();
+                }
+                catch
+                {
+                    result = -2;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result ?? 0;
+        }
         public Category GetCategory(MySqlDataReader reader)
         {
             Category category = new Category();
