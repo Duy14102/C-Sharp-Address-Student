@@ -29,5 +29,9 @@ namespace BL
         {
             return itemDAL.GetDisplayMenu();
         }
+        public bool RemoveItem(int id)
+        {
+            return itemDAL.removeitem(id);
+        }
     }
 }

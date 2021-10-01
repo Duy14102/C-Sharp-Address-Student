@@ -48,7 +48,7 @@ namespace ConsoleApp
             switch (staff.Role)
             {
                 case Staff.STAFF_ROLE:
-                    string[] menuItemsStaff = { "CREATE ORDER\t\t\t   │", "CREATE TABLE\t\t\t   │", "MENU MANAGEMENT\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
+                    string[] menuItemsStaff = { "CREATE ORDER\t\t\t   │", "TABLE MANAGEMENT\t\t\t   │", "MENU MANAGEMENT\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
                     do
                     {
                         choice = Menu("POPULAR RICE SYSTEM", menuItemsStaff);
@@ -73,7 +73,7 @@ namespace ConsoleApp
                     } while (choice != menuItemsStaff.Length);
                     break;
                 case Staff.ADMIN_ROLE:
-                    string[] menuItemsAdmin = { "CREATE ORDER\t\t\t   │", "CREATE TABLE\t\t\t   │", "MENU MANAGEMENT\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
+                    string[] menuItemsAdmin = { "CREATE ORDER\t\t\t   │", "TABLE MANAGEMENT\t\t\t   │", "MENU MANAGEMENT\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
                     List<TableFood> tablesAdmin = new List<TableFood>();
                     do
                     {
@@ -154,18 +154,18 @@ namespace ConsoleApp
         {
             int chooseit;
             Console.Clear();
-            string line = "============================================================";
+            string line = "┼──────────────────────────────────────────────────────────┼";
             string title = "MENU MANAGEMENT";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
-            Console.WriteLine();
-            Console.WriteLine("{0," + position + "}\b{1}", "", title);
-            Console.WriteLine();
+            Console.WriteLine("│\t\t\t\t\t\t\t   │");
+            Console.WriteLine("│{0," + position + "}\b{1}\t\t\t   │", "", title);
+            Console.WriteLine("│\t\t\t\t\t\t\t   │");
             Console.WriteLine(line);
-            Console.WriteLine("  1. Add Item\n  2. Get item by id\n  3. Get item by name\n  4. Get all item\n  5. Exit to main menu");
+            Console.WriteLine("│  1. Add Item\t\t\t\t\t\t   │\n│  2. Remove Item\t\t\t\t\t   │\n│  3. Get item by id\t\t\t\t\t   │\n│  4. Get item by name\t\t\t\t\t   │\n│  5. Get all item\t\t\t\t\t   │\n│  6. Exit to main menu\t\t\t\t\t   │");
             Console.WriteLine(line);
             Console.WriteLine();
-            Console.Write("  Your choice : ");
+            Console.Write("  ───> Your choice : ");
             chooseit = GetID();
             while (chooseit < 1 || chooseit > 6)
             {
@@ -231,6 +231,64 @@ namespace ConsoleApp
                     break;
                 case 2:
                     Console.Clear();
+                    Console.Write("Are you sure you want to remove item ? (yes/no) : ");
+                    string takeit = Console.ReadLine();
+                    do
+                    {
+                        if (takeit == "yes")
+                        {
+                            Console.Clear();
+                            Console.Write("Input Id of item to remove : ");
+                            int getit = GetID();
+                            Item item = itemBL.GetById(getit);
+                            if (item == null)
+                            {
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("Item Id invalid!");
+                                Console.ResetColor();
+                                Console.Write("Press any key to continue...");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                bool wow = itemBL.RemoveItem(getit);
+                                if (wow)
+                                {
+                                    Console.Clear();
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("Remove Item Complete!");
+                                    Console.ResetColor();
+                                    Console.Write("Press any key to continue...");
+                                    Console.ReadKey();
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Remove Item Fail!");
+                                    Console.ResetColor();
+                                    Console.Write("Press any key to continue...");
+                                    Console.ReadKey();
+                                }
+                            }
+                            break;
+                        }
+                        else if (takeit == "no")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Invalid input, re-enter : ");
+                            Console.ResetColor();
+                            takeit = Console.ReadLine();
+                        }
+                    } while (takeit != "no");
+                    break;
+                case 3:
+                    Console.Clear();
                     Console.Write("Input Item ID to search or input 0 to exit to menu : ");
                     int id = GetID();
                     if (id == 0) break;
@@ -261,7 +319,7 @@ namespace ConsoleApp
                         Console.ReadKey();
                     }
                     break;
-                case 3:
+                case 4:
                     List<Item> items1;
                     Console.Clear();
                     Console.Write("Input ItemName to search or input 0 to back to main menu : ");
@@ -285,7 +343,7 @@ namespace ConsoleApp
                         Console.ReadKey();
                     }
                     break;
-                case 4:
+                case 5:
                     List<Item> items = new List<Item>();
                     Console.Clear();
                     items = itemBL.GetItems();
@@ -302,20 +360,206 @@ namespace ConsoleApp
                         Console.ReadKey();
                     }
                     break;
-                case 5:
+                case 6:
                     break;
             }
         }
         static void CreateTable(Staff staff)
         {
+            int chooseit;
             Console.Clear();
-            Console.Write("Name of new table : ");
-            string nametable = Console.ReadLine();
-            TableFood table = new TableFood { Name = nametable };
-            Console.WriteLine("TableId : " + tableBL.AddTable(table));
-            Console.WriteLine("Create Table Successfully!");
-            Console.Write("Press any key to continue...");
-            Console.ReadKey();
+            string line = "┼──────────────────────────────────────────────────────────┼";
+            string title = "TABLE MANAGEMENT";
+            int position = line.Length / 2 - title.Length / 2;
+            Console.WriteLine(line);
+            Console.WriteLine("│\t\t\t\t\t\t\t   │");
+            Console.WriteLine("│{0," + position + "}\b{1}\t\t\t   │", "", title);
+            Console.WriteLine("│\t\t\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  1. Add Table\t\t\t\t\t\t   │\n│  2. Remove Table\t\t\t\t\t   │\n│  3. Get table by id\t\t\t\t\t   │\n│  4. Get table by name\t\t\t\t\t   │\n│  5. Get all table\t\t\t\t\t   │\n│  6. Exit to main menu\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine();
+            Console.Write("  ───> Your choice : ");
+            chooseit = GetID();
+            while (chooseit < 1 || chooseit > 6)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Invalid Input, re-enter : ");
+                Console.ResetColor();
+                chooseit = GetID();
+            }
+            switch (chooseit)
+            {
+                case 1:
+                    Console.Clear();
+                    Console.Write("Are you sure you want to create new table ? (yes/no) : ");
+                    string tookit = Console.ReadLine();
+                    do
+                    {
+                        if (tookit == "yes")
+                        {
+                            Console.Clear();
+                            Console.Write("Name of new table : ");
+                            string nametable = Console.ReadLine();
+                            TableFood table = new TableFood { Name = nametable };
+                            tableBL.AddTable(table);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Create Table Successfully!");
+                            Console.ResetColor();
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        }
+                        else if (tookit == "no")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Invalid input, re-enter : ");
+                            Console.ResetColor();
+                            tookit = Console.ReadLine();
+
+                        }
+                    } while (tookit != "no");
+                    break;
+                case 2:
+                    Console.Clear();
+                    Console.Write("Are you sure you want to remove table ? (yes/no) : ");
+                    string takeit = Console.ReadLine();
+                    do
+                    {
+                        if (takeit == "yes")
+                        {
+                            Console.Clear();
+                            Console.Write("Input Id of table to remove : ");
+                            int getit = GetID();
+                            TableFood tableFood = tableBL.GetById(getit);
+                            if (tableFood == null)
+                            {
+                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("Item Id invalid!");
+                                Console.ResetColor();
+                                Console.Write("Press any key to continue...");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                bool wow = tableBL.RemoveItem(getit);
+                                if (wow)
+                                {
+                                    Console.Clear();
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("Remove Table Complete!");
+                                    Console.ResetColor();
+                                    Console.Write("Press any key to continue...");
+                                    Console.ReadKey();
+                                }
+                                else
+                                {
+                                    Console.Clear();
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Remove Table Fail!");
+                                    Console.ResetColor();
+                                    Console.Write("Press any key to continue...");
+                                    Console.ReadKey();
+                                }
+                            }
+                            break;
+                        }
+                        else if (takeit == "no")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("Invalid input, re-enter : ");
+                            Console.ResetColor();
+                            takeit = Console.ReadLine();
+                        }
+                    } while (takeit != "no");
+                    break;
+                case 3:
+                    Console.Clear();
+                    Console.Write("Input Item ID to search or input 0 to exit to menu : ");
+                    int id = GetID();
+                    if (id == 0) break;
+                    TableFood tableFood2 = tableBL.GetById(id);
+                    if (tableFood2 == null)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Table Not Found!");
+                        Console.ResetColor();
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        string status;
+                        string linek = "┼────────────────────────────────────────────────┼";
+                        string titlek = "TABLES";
+                        int positionk = linek.Length / 2 - titlek.Length / 2;
+                        Console.WriteLine(linek);
+                        Console.WriteLine("│{0," + positionk + "}\b{1}\t\t\t │", "", titlek);
+                        Console.WriteLine(linek);
+                        Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", "ID", "Name", "Status");
+                        Console.WriteLine(linek);
+                        status = tableFood2.Status == TableFood.READY_STATUS ? "Ready" : "In Use";
+                        Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", tableFood2.TableId, tableFood2.Name, status);
+                        Console.WriteLine(linek);
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                    }
+                    break;
+                case 4:
+                    List<TableFood> tableFoods1;
+                    Console.Clear();
+                    Console.Write("Input table name to search or input 0 to back to main menu : ");
+                    string name = Console.ReadLine();
+                    if (name == "0") break;
+                    tableFoods1 = tableBL.GetByName(name);
+                    if (tableFoods1 == null)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Table Not Found!");
+                        Console.ResetColor();
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        DisplayTables(tableFoods1);
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                    }
+                    break;
+                case 5:
+                    List<TableFood> tableFoods = new List<TableFood>();
+                    Console.Clear();
+                    tableFoods = tableBL.GetAllTableFood();
+                    if (tableFoods == null)
+                    {
+                        Console.WriteLine("Nothing to show!");
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        DisplayTables(tableFoods);
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                    }
+                    break;
+                case 6:
+                    break;
+            }
         }
         static void CreateOrder(Staff staff)
         {
@@ -445,18 +689,18 @@ namespace ConsoleApp
             int chooseit, chooseinvoice, chooseidinvoice, choosefunction, choosefunctionid;
             string answer1, answer2, answer3, answer4;
             Console.Clear();
-            string line = "============================================================";
+            string line = "┼──────────────────────────────────────────────────────────┼";
             string title = "INVOICE SYSTEM";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
-            Console.WriteLine();
-            Console.WriteLine("{0," + position + "}\b{1}", "", title);
-            Console.WriteLine();
+            Console.WriteLine("│\t\t\t\t\t\t\t   │");
+            Console.WriteLine("│{0," + position + "}\b{1}\t\t\t   │", "", title);
+            Console.WriteLine("│\t\t\t\t\t\t\t   │");
             Console.WriteLine(line);
-            Console.WriteLine("  1. Show All Invoice\n  2. Show Invoice By ID\n  3. Back to menu");
+            Console.WriteLine("│  1. Show List Order\t\t\t\t\t   │\n│  2. Show Order By ID\t\t\t\t\t   │\n│  3. Back to menu\t\t\t\t\t   │");
             Console.WriteLine(line);
             Console.WriteLine();
-            Console.Write("  Your choice : ");
+            Console.Write("  ───> Your choice : ");
             chooseit = GetID();
             while (chooseit < 1 || chooseit > 3)
             {
@@ -511,7 +755,7 @@ namespace ConsoleApp
                             Console.WriteLine("│ 1. Payment\t\t\t\t\t\t\t\t   │\n│ 2. Cancel Invoice\t\t\t\t\t\t\t   │\n│ 3. Add dishes\t\t\t\t\t\t\t\t   │\n│ 4. Remove dishes\t\t\t\t\t\t\t   │\n│ 5. Back to menu\t\t\t\t\t\t\t   │");
                             Console.WriteLine(lined);
                             Console.WriteLine();
-                            Console.Write("───> Your choice : ");
+                            Console.Write("  ───> Your choice : ");
                             choosefunction = GetID();
                             while (choosefunction < 1 || choosefunction > 5)
                             {
@@ -743,7 +987,7 @@ namespace ConsoleApp
                         Console.WriteLine("│ 1. Payment\t\t\t\t\t\t\t\t   │\n│ 2. Cancel Invoice\t\t\t\t\t\t\t   │\n│ 3. Add dishes\t\t\t\t\t\t\t\t   │\n│ 4. Remove dishes\t\t\t\t\t\t\t   │\n│ 5. Back to menu\t\t\t\t\t\t\t   │");
                         Console.WriteLine(lined);
                         Console.WriteLine();
-                        Console.Write("──> Your Choice : ");
+                        Console.Write("  ───> Your Choice : ");
                         choosefunctionid = GetID();
                         while (choosefunctionid < 1 || choosefunctionid > 5)
                         {
@@ -1033,7 +1277,7 @@ namespace ConsoleApp
                 Console.WriteLine("│  {0}. {1}", i + 1, menuItems[i]);
             }
             Console.WriteLine(line);
-            Console.Write("\n → Your choice: ");
+            Console.Write("\n  ───> Your choice: ");
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out choose) && choose >= 1 && choose <= menuItems.Length) return choose;

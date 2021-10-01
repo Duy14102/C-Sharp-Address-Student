@@ -28,5 +28,13 @@ namespace BL
         {
             return tableDAL.TableStatusCheck(status);
         }
+        public bool RemoveItem(int id)
+        {
+            return tableDAL.removeitem(id);
+        }
+        public List<TableFood> GetByName(string name)
+        {
+            return tableDAL.GetByName(new TableFood { Name = name });
+        }
     }
 }

@@ -134,6 +134,30 @@ namespace DAL
             finally { connection.Close(); }
             return result;
         }
+        public bool removeitem(int id)
+        {
+            bool result = false;
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    query = "delete from Items where Items_ID = " + id + ";";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
         public Item GetItem(MySqlDataReader reader)
         {
             Item items = new Item();

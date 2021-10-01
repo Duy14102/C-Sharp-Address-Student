@@ -120,6 +120,55 @@ namespace DAL
             }
             return result;
         }
+        public bool removeitem(int id)
+        {
+            bool result = false;
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    query = "delete from TableFood where Tables_ID = " + id + ";";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                    result = true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
+        public List<TableFood> GetByName(TableFood tableFood)
+        {
+            List<TableFood> tablelist = null;
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand("", connection);
+                    query = @"select * from TableFood where Tables_Name like concat('%',@Tables_Name,'%');";
+                    command.Parameters.AddWithValue("@Tables_Name", tableFood.Name);
+                    command.CommandText = query;
+                    MySqlDataReader reader = command.ExecuteReader();
+                    tablelist = new List<TableFood>();
+                    while (reader.Read())
+                    {
+                        tablelist.Add(GetTableFood(reader));
+                    }
+                    reader.Close();
+                }
+                catch { }
+                finally { connection.Close(); }
+            }
+            return tablelist;
+        }
         internal TableFood GetTableFood(MySqlDataReader reader)
         {
             TableFood table = new TableFood();

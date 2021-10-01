@@ -114,6 +114,7 @@ Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.Invoic
  select * from TableFood;
  select TableID_FK from Invoices where Invoices_ID = 1;
  update TableFood set Tables_Status = 1 where Tables_ID = 4;
+ select * from TableFood where Tables_Name = 'Table 1';
  
  select * from Items;
  
