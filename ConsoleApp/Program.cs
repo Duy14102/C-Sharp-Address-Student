@@ -1086,17 +1086,7 @@ namespace ConsoleApp
                                                 bool move = invoicesBL.UpdateQuantityItem(choosedishes, chooseinvoice, quantitydishes);
                                                 if (move)
                                                 {
-                                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                                    Console.WriteLine("│                                              │");
-                                                    Console.Write("│            ");
-                                                    Console.ForegroundColor = ConsoleColor.Green;
-                                                    Console.Write("Added Successfully!");
-                                                    Console.WriteLine("               │");
-                                                    Console.WriteLine("│                                              │");
-                                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                                    Console.ResetColor();
-                                                    Console.Write("Press any key to continue...");
-                                                    Console.ReadKey();
+
                                                 }
                                                 else
                                                 {
@@ -1108,17 +1098,7 @@ namespace ConsoleApp
                                                 bool mark = invoicesBL.UpdateItemNew(chooseinvoice, choosedishes, quantitydishes);
                                                 if (mark)
                                                 {
-                                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                                    Console.WriteLine("│                                              │");
-                                                    Console.Write("│            ");
-                                                    Console.ForegroundColor = ConsoleColor.Green;
-                                                    Console.Write("Added Successfully!");
-                                                    Console.WriteLine("               │");
-                                                    Console.WriteLine("│                                              │");
-                                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                                    Console.ResetColor();
-                                                    Console.Write("Press any key to continue...");
-                                                    Console.ReadKey();
+
                                                 }
                                                 else
                                                 {

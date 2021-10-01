@@ -35,5 +35,21 @@ namespace DALtest
             int result = itemDAL.GetById(id).ItemsID;
             Assert.True(id == result);
         }
+        [Theory]
+        [InlineData("Pork", 1, 10, 0)]
+        [InlineData("Potato", 3, 5, 0)]
+        [InlineData("Tomatoes", 3, 5, 0)]
+        [InlineData("Dog meat", 1, 15, 0)]
+        [InlineData("Beef", 1, 15, 0)]
+        [InlineData("Bean", 3, 5, 0)]
+        [InlineData("Sting", 5, 10, 0)]
+        public void InsertTest1(string name, int categoryid, decimal price, int expected)
+        {
+            item.ItemName = name;
+            item.CategoryInfo.CategoryID = categoryid;
+            item.ItemPrice = price;
+            int result = itemDAL.InsertTest(item);
+            Assert.True(result <= expected);
+        }
     }
 }

@@ -158,6 +158,34 @@ namespace DAL
             }
             return result;
         }
+        public int InsertTest(Item item)
+        {
+            int? result = null;
+            MySqlConnection connection = DBhelper.GetConnection();
+            string sql = @"insert into Items(Items_Name, CategoryID_FK, Items_Price) values 
+                      (@itemname, @category, @price);";
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@itemname", item.ItemName);
+                    command.Parameters.AddWithValue("@category", item.CategoryInfo.CategoryID);
+                    command.Parameters.AddWithValue("@price", item.ItemPrice);
+                    // result = command.ExecuteNonQuery();
+                }
+                catch
+                {
+                    result = -2;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result ?? 0;
+        }
         public Item GetItem(MySqlDataReader reader)
         {
             Item items = new Item();
