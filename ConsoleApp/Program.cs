@@ -20,23 +20,36 @@ namespace ConsoleApp
             do
             {
                 Console.Clear();
-                Console.WriteLine("┼─────────────────────────────┼");
-                Console.WriteLine("│                             │");
-                Console.WriteLine("│    ***     Login     ***    │");
-                Console.WriteLine("│                             │");
-                Console.WriteLine("┼─────────────────────────────┼");
-                Console.Write(" User Name: ");
+                Console.WriteLine("┼────────────────────────────────────────────────────────┼");
+                Console.WriteLine("│                                                        │");
+                Console.WriteLine("│        _        _____    _____    __    __  ___        │");
+                Console.WriteLine("│       │ │      │     │  │ ___ │  │  │  │  │/   │       │");
+                Console.WriteLine("│       │ │      │ ___ │  ││___││  │  │  │   /│  │       │");
+                Console.WriteLine("│       │ │      ││___││  │_____│  │  │  │  │ │  │       │");
+                Console.WriteLine("│       │ │___   │     │   _____│  │  │  │  │ │  │       │");
+                Console.WriteLine("│       │_____│  │_____│  │_____│  │__│  │__│ │__│       │");
+                Console.WriteLine("│                                                        │");
+                Console.WriteLine("┼────────────────────────────────────────────────────────┼");
+                Console.Write("                    User Name : ");
                 string userName = Console.ReadLine();
-                Console.Write(" Password: ");
+                Console.WriteLine("         ┼────────────────────────────────────┼");
+                Console.Write("                    Password : ");
                 string pass = GetPassword();
                 Console.WriteLine();
                 //valid username password
                 staff = staffBL.Login(new Staff { Username = userName, Userpass = pass });
                 if (staff == null)
                 {
+                    Console.Clear();
+                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                    Console.WriteLine("│                                              │");
+                    Console.Write("│       ");
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Incorrect Username or Password!");
+                    Console.Write("Incorrect Username or Password!");
                     Console.ResetColor();
+                    Console.WriteLine("        │");
+                    Console.WriteLine("│                                              │");
+                    Console.WriteLine("┼──────────────────────────────────────────────┼");
                     Console.Write("Press any key to login again....");
                     Console.ReadKey(true);
                 }
@@ -111,7 +124,12 @@ namespace ConsoleApp
                 invoices = invoicesBL.GetHistory();
                 if (invoices == null)
                 {
-                    Console.WriteLine("Nothing to show!");
+                    Console.Clear();
+                    Console.WriteLine("┼─────────────────────────────────┼");
+                    Console.WriteLine("│                                 │");
+                    Console.WriteLine("│        Nothing to show!         │");
+                    Console.WriteLine("│                                 │");
+                    Console.WriteLine("┼─────────────────────────────────┼");
                     Console.Write("Press any key to continue...");
                     Console.ReadKey();
                     break;
@@ -209,9 +227,15 @@ namespace ConsoleApp
                             item.CategoryInfo = category;
                             itemBL.AddItem(item);
                             Console.Clear();
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                            Console.WriteLine("│                                              │");
+                            Console.Write("│           ");
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Add Item Successfully!");
+                            Console.Write("Add Item Successfully!");
                             Console.ResetColor();
+                            Console.WriteLine("             │");
+                            Console.WriteLine("│                                              │");
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                             Console.Write("Press any key to continue...");
                             Console.ReadKey();
                             break;
@@ -244,9 +268,15 @@ namespace ConsoleApp
                             if (item == null)
                             {
                                 Console.Clear();
+                                Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                Console.WriteLine("│                                              │");
+                                Console.Write("│              ");
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write("Item Id invalid!");
                                 Console.ResetColor();
+                                Console.WriteLine("                │");
+                                Console.WriteLine("│                                              │");
+                                Console.WriteLine("┼──────────────────────────────────────────────┼");
                                 Console.Write("Press any key to continue...");
                                 Console.ReadKey();
                             }
@@ -256,18 +286,30 @@ namespace ConsoleApp
                                 if (wow)
                                 {
                                     Console.Clear();
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                    Console.WriteLine("│                                              │");
+                                    Console.Write("│           ");
                                     Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine("Remove Item Complete!");
+                                    Console.Write("Remove Item Complete!");
                                     Console.ResetColor();
+                                    Console.WriteLine("              │");
+                                    Console.WriteLine("│                                              │");
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
                                     Console.Write("Press any key to continue...");
                                     Console.ReadKey();
                                 }
                                 else
                                 {
                                     Console.Clear();
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                    Console.WriteLine("│                                              │");
+                                    Console.Write("│              ");
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Remove Item Fail!");
+                                    Console.Write("Remove Item Fail!");
                                     Console.ResetColor();
+                                    Console.WriteLine("               │");
+                                    Console.WriteLine("│                                              │");
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
                                     Console.Write("Press any key to continue...");
                                     Console.ReadKey();
                                 }
@@ -296,9 +338,15 @@ namespace ConsoleApp
                     if (itemId == null)
                     {
                         Console.Clear();
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                        Console.WriteLine("│                                              │");
+                        Console.Write("│              ");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Item Not Found!");
+                        Console.Write("Item Not Found!");
                         Console.ResetColor();
+                        Console.WriteLine("                 │");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -329,9 +377,15 @@ namespace ConsoleApp
                     if (items1 == null)
                     {
                         Console.Clear();
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                        Console.WriteLine("│                                              │");
+                        Console.Write("│              ");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Item Not Found!");
+                        Console.Write("Item Not Found!");
                         Console.ResetColor();
+                        Console.WriteLine("                 │");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -349,7 +403,12 @@ namespace ConsoleApp
                     items = itemBL.GetItems();
                     if (items == null)
                     {
-                        Console.WriteLine("Nothing to show!");
+                        Console.Clear();
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("│               Nothing to show!               │");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -403,9 +462,16 @@ namespace ConsoleApp
                             string nametable = Console.ReadLine();
                             TableFood table = new TableFood { Name = nametable };
                             tableBL.AddTable(table);
+                            Console.Clear();
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                            Console.WriteLine("│                                              │");
+                            Console.Write("│          ");
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Create Table Successfully!");
+                            Console.Write("Create Table Successfully!");
                             Console.ResetColor();
+                            Console.WriteLine("          │");
+                            Console.WriteLine("│                                              │");
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                             Console.Write("Press any key to continue...");
                             Console.ReadKey();
                             break;
@@ -439,9 +505,15 @@ namespace ConsoleApp
                             if (tableFood == null)
                             {
                                 Console.Clear();
+                                Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                Console.WriteLine("│                                              │");
+                                Console.Write("│              ");
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write("Item Id invalid!");
                                 Console.ResetColor();
+                                Console.WriteLine("                │");
+                                Console.WriteLine("│                                              │");
+                                Console.WriteLine("┼──────────────────────────────────────────────┼");
                                 Console.Write("Press any key to continue...");
                                 Console.ReadKey();
                             }
@@ -451,18 +523,30 @@ namespace ConsoleApp
                                 if (wow)
                                 {
                                     Console.Clear();
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                    Console.WriteLine("│                                              │");
+                                    Console.Write("│           ");
                                     Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine("Remove Table Complete!");
+                                    Console.Write("Remove Table Complete!");
                                     Console.ResetColor();
+                                    Console.WriteLine("             │");
+                                    Console.WriteLine("│                                              │");
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
                                     Console.Write("Press any key to continue...");
                                     Console.ReadKey();
                                 }
                                 else
                                 {
                                     Console.Clear();
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                    Console.WriteLine("│                                              │");
+                                    Console.Write("│             ");
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Remove Table Fail!");
+                                    Console.Write("Remove Table Fail!");
                                     Console.ResetColor();
+                                    Console.WriteLine("               │");
+                                    Console.WriteLine("│                                              │");
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
                                     Console.Write("Press any key to continue...");
                                     Console.ReadKey();
                                 }
@@ -491,9 +575,15 @@ namespace ConsoleApp
                     if (tableFood2 == null)
                     {
                         Console.Clear();
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                        Console.WriteLine("│                                              │");
+                        Console.Write("│              ");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Table Not Found!");
+                        Console.Write("Table Not Found!");
                         Console.ResetColor();
+                        Console.WriteLine("                │");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -526,9 +616,15 @@ namespace ConsoleApp
                     if (tableFoods1 == null)
                     {
                         Console.Clear();
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                        Console.WriteLine("│                                              │");
+                        Console.Write("│              ");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Table Not Found!");
+                        Console.Write("Table Not Found!");
                         Console.ResetColor();
+                        Console.WriteLine("                │");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -546,7 +642,11 @@ namespace ConsoleApp
                     tableFoods = tableBL.GetAllTableFood();
                     if (tableFoods == null)
                     {
-                        Console.WriteLine("Nothing to show!");
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("│               Nothing to show!               │");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -573,7 +673,11 @@ namespace ConsoleApp
                 tablesStaff = tableBL.GetAllTableFood();
                 if (tablesStaff == null)
                 {
-                    Console.WriteLine("Nothing to show!");
+                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                    Console.WriteLine("│                                              │");
+                    Console.WriteLine("│               Nothing to show!               │");
+                    Console.WriteLine("│                                              │");
+                    Console.WriteLine("┼──────────────────────────────────────────────┼");
                     Console.Write("Press any key to continue...");
                     Console.ReadKey();
                     break;
@@ -589,9 +693,15 @@ namespace ConsoleApp
                 if (table == null)
                 {
                     Console.Clear();
+                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                    Console.WriteLine("│                                              │");
+                    Console.Write("│              ");
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(" Table Id Invalid!");
+                    Console.Write("Table Id Invalid!");
                     Console.ResetColor();
+                    Console.WriteLine("               │");
+                    Console.WriteLine("│                                              │");
+                    Console.WriteLine("┼──────────────────────────────────────────────┼");
                     Console.Write("Press any key to continue...");
                     Console.ReadKey();
                 }
@@ -600,9 +710,15 @@ namespace ConsoleApp
                     if (table.Status == 2)
                     {
                         Console.Clear();
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                        Console.WriteLine("│                                              │");
+                        Console.Write("│    ");
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Table is IN USE, cannot create order!");
+                        Console.Write("Table is IN USE, cannot create order!");
                         Console.ResetColor();
+                        Console.WriteLine("     │");
+                        Console.WriteLine("│                                              │");
+                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -620,9 +736,16 @@ namespace ConsoleApp
                             Item item = itemBL.GetById(choosedishes);
                             if (item == null)
                             {
+                                Console.Clear();
+                                Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                Console.WriteLine("│                                              │");
+                                Console.Write("│             ");
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine(" Dishes Id Invalid!");
+                                Console.Write("Dishes Id Invalid!");
                                 Console.ResetColor();
+                                Console.WriteLine("               │");
+                                Console.WriteLine("│                                              │");
+                                Console.WriteLine("┼──────────────────────────────────────────────┼");
                                 Console.Write("Press any key to continue...");
                                 Console.ReadKey();
                             }
@@ -633,9 +756,8 @@ namespace ConsoleApp
                                 while (quantitydishes < 1 || quantitydishes > 100)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Invalid quantity!");
+                                    Console.Write("Invalid input, re-enter : ");
                                     Console.ResetColor();
-                                    Console.Write("Try again : ");
                                     quantitydishes = int.Parse(Console.ReadLine());
                                 }
                                 bool result2 = false;
@@ -663,18 +785,30 @@ namespace ConsoleApp
                         if (result)
                         {
                             Console.Clear();
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                            Console.WriteLine("│                                              │");
+                            Console.Write("│         ");
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Create Order Successfully!");
+                            Console.Write("Create Order Successfully!");
                             Console.ResetColor();
+                            Console.WriteLine("           │");
+                            Console.WriteLine("│                                              │");
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                             Console.Write("Press any key to continue...");
                             Console.ReadKey();
                         }
                         else
                         {
                             Console.Clear();
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                            Console.WriteLine("│                                              │");
+                            Console.Write("│             ");
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Create Order Fail!");
+                            Console.Write("Create Order Fail!");
                             Console.ResetColor();
+                            Console.WriteLine("               │");
+                            Console.WriteLine("│                                              │");
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                             Console.Write("Press any key to continue...");
                             Console.ReadKey();
                         }
@@ -718,7 +852,11 @@ namespace ConsoleApp
                         invoices = invoicesBL.GetAllInvoice();
                         if (invoices == null)
                         {
-                            Console.WriteLine("Nothing to show!");
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                            Console.WriteLine("│                                              │");
+                            Console.WriteLine("│               Nothing to show!               │");
+                            Console.WriteLine("│                                              │");
+                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                             Console.Write("Press any key to continue...");
                             Console.ReadKey();
                             break;
@@ -768,6 +906,18 @@ namespace ConsoleApp
                             {
                                 case 1://payment
                                     Console.Clear();
+                                    Console.WriteLine(lined);
+                                    Console.WriteLine("│\t\t\t      Order {0} Payment      \t\t\t   │", chooseinvoice);
+                                    Console.WriteLine(lined);
+                                    Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
+                                    Console.WriteLine(lined);
+                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                                    Console.WriteLine(lined);
+                                    for (int i = 0; i < invoice.Items.Count; i++)
+                                    {
+                                        Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice.Items[i].ItemsID, invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
+                                        Console.WriteLine(lined);
+                                    }
                                     Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
                                     answer1 = Console.ReadLine();
                                     do
@@ -778,17 +928,30 @@ namespace ConsoleApp
                                             if (resultpayment)
                                             {
                                                 Console.Clear();
+                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                Console.WriteLine("│                                              │");
+                                                Console.Write("│             ");
                                                 Console.ForegroundColor = ConsoleColor.Green;
-                                                Console.WriteLine("Payment Complete!");
+                                                Console.Write("Payment Complete!");
                                                 Console.ResetColor();
+                                                Console.WriteLine("                │");
+                                                Console.WriteLine("│                                              │");
+                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
                                                 Console.Write("Press any key to continue...");
                                                 Console.ReadKey();
                                             }
                                             else
                                             {
+                                                Console.Clear();
+                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                Console.WriteLine("│                                              │");
+                                                Console.Write("│           ");
                                                 Console.ForegroundColor = ConsoleColor.Red;
-                                                Console.WriteLine("Payment Not Complete!");
+                                                Console.Write("Payment Not Complete!");
                                                 Console.ResetColor();
+                                                Console.WriteLine("              │");
+                                                Console.WriteLine("│                                              │");
+                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
                                                 Console.Write("Press any key to continue...");
                                                 Console.ReadKey();
                                             }
@@ -800,13 +963,27 @@ namespace ConsoleApp
                                         }
                                         else
                                         {
+                                            Console.ForegroundColor = ConsoleColor.Red;
                                             Console.Write("Invalid input, re-enter : ");
+                                            Console.ResetColor();
                                             answer1 = Console.ReadLine();
                                         }
                                     } while (answer1 != "no");
                                     break;
                                 case 2://Cancel
                                     Console.Clear();
+                                    Console.WriteLine(lined);
+                                    Console.WriteLine("│\t\t\t      Order {0} Cancel      \t\t\t   │", chooseinvoice);
+                                    Console.WriteLine(lined);
+                                    Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
+                                    Console.WriteLine(lined);
+                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                                    Console.WriteLine(lined);
+                                    for (int i = 0; i < invoice.Items.Count; i++)
+                                    {
+                                        Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice.Items[i].ItemsID, invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
+                                        Console.WriteLine(lined);
+                                    }
                                     Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
                                     answer2 = Console.ReadLine();
                                     do
@@ -817,17 +994,30 @@ namespace ConsoleApp
                                             if (resultcancel)
                                             {
                                                 Console.Clear();
+                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                Console.WriteLine("│                                              │");
+                                                Console.Write("│          ");
                                                 Console.ForegroundColor = ConsoleColor.Green;
-                                                Console.WriteLine("Cancel Invoice Complete!");
+                                                Console.Write("Cancel Invoice Complete!");
                                                 Console.ResetColor();
+                                                Console.WriteLine("            │");
+                                                Console.WriteLine("│                                              │");
+                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
                                                 Console.Write("Press any key to continue...");
                                                 Console.ReadKey();
                                             }
                                             else
                                             {
+                                                Console.Clear();
+                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                Console.WriteLine("│                                              │");
+                                                Console.Write("│            ");
                                                 Console.ForegroundColor = ConsoleColor.Red;
-                                                Console.WriteLine("Cancel Invoice Fail!");
+                                                Console.Write("Cancel Invoice Fail!");
                                                 Console.ResetColor();
+                                                Console.WriteLine("              │");
+                                                Console.WriteLine("│                                              │");
+                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
                                                 Console.Write("Press any key to continue...");
                                                 Console.ReadKey();
                                             }
@@ -839,7 +1029,9 @@ namespace ConsoleApp
                                         }
                                         else
                                         {
+                                            Console.ForegroundColor = ConsoleColor.Red;
                                             Console.Write("Invalid input, re-enter : ");
+                                            Console.ResetColor();
                                             answer2 = Console.ReadLine();
                                         }
                                     } while (answer2 != "no");
@@ -857,9 +1049,15 @@ namespace ConsoleApp
                                         if (item == null)
                                         {
                                             Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│             ");
                                             Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine(" Dishes Id Invalid!");
+                                            Console.Write("Dishes Id Invalid!");
                                             Console.ResetColor();
+                                            Console.WriteLine("               │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                                             Console.Write("Press any key to continue...");
                                             Console.ReadKey();
                                         }
@@ -870,9 +1068,8 @@ namespace ConsoleApp
                                             while (quantitydishes < 0 || quantitydishes > 100)
                                             {
                                                 Console.ForegroundColor = ConsoleColor.Red;
-                                                Console.WriteLine("Invalid quantity!");
+                                                Console.Write("Invalid Input, re-enter : ");
                                                 Console.ResetColor();
-                                                Console.Write("Try again : ");
                                                 quantitydishes = int.Parse(Console.ReadLine());
                                             }
                                             bool result2 = false;
@@ -889,7 +1086,17 @@ namespace ConsoleApp
                                                 bool move = invoicesBL.UpdateQuantityItem(choosedishes, chooseinvoice, quantitydishes);
                                                 if (move)
                                                 {
-
+                                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                    Console.WriteLine("│                                              │");
+                                                    Console.Write("│            ");
+                                                    Console.ForegroundColor = ConsoleColor.Green;
+                                                    Console.Write("Added Successfully!");
+                                                    Console.WriteLine("               │");
+                                                    Console.WriteLine("│                                              │");
+                                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                    Console.ResetColor();
+                                                    Console.Write("Press any key to continue...");
+                                                    Console.ReadKey();
                                                 }
                                                 else
                                                 {
@@ -901,7 +1108,17 @@ namespace ConsoleApp
                                                 bool mark = invoicesBL.UpdateItemNew(chooseinvoice, choosedishes, quantitydishes);
                                                 if (mark)
                                                 {
-
+                                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                    Console.WriteLine("│                                              │");
+                                                    Console.Write("│            ");
+                                                    Console.ForegroundColor = ConsoleColor.Green;
+                                                    Console.Write("Added Successfully!");
+                                                    Console.WriteLine("               │");
+                                                    Console.WriteLine("│                                              │");
+                                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                    Console.ResetColor();
+                                                    Console.Write("Press any key to continue...");
+                                                    Console.ReadKey();
                                                 }
                                                 else
                                                 {
@@ -909,7 +1126,7 @@ namespace ConsoleApp
                                                 }
                                             }
                                             Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.WriteLine("Added Successfully");
+                                            Console.Write("Added Successfully!");
                                             Console.ResetColor();
                                         }
                                     }
@@ -923,9 +1140,15 @@ namespace ConsoleApp
                                     if (item2 == null)
                                     {
                                         Console.Clear();
+                                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                        Console.WriteLine("│                                              │");
+                                        Console.Write("│             ");
                                         Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine(" Dishes Id Invalid!");
+                                        Console.Write("Dishes Id Invalid!");
                                         Console.ResetColor();
+                                        Console.WriteLine("               │");
+                                        Console.WriteLine("│                                              │");
+                                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                                         Console.Write("Press any key to continue...");
                                         Console.ReadKey();
                                     }
@@ -935,17 +1158,30 @@ namespace ConsoleApp
                                         if (make)
                                         {
                                             Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│              ");
                                             Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.WriteLine("Remove Complete!");
+                                            Console.Write("Remove Complete!");
                                             Console.ResetColor();
+                                            Console.WriteLine("                │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                                             Console.Write("Press any key to continue...");
                                             Console.ReadKey();
                                         }
                                         else
                                         {
+                                            Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│                ");
                                             Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine("Remove Fail!");
+                                            Console.Write("Remove Fail!");
                                             Console.ResetColor();
+                                            Console.WriteLine("                  │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                                             Console.Write("Press any key to continue...");
                                             Console.ReadKey();
                                         }
@@ -1000,7 +1236,19 @@ namespace ConsoleApp
                         {
                             case 1://payment
                                 Console.Clear();
-                                Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
+                                Console.WriteLine(lined);
+                                Console.WriteLine("│\t\t\t      Order {0} Payment      \t\t\t   │", chooseidinvoice);
+                                Console.WriteLine(lined);
+                                Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
+                                Console.WriteLine(lined);
+                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                                Console.WriteLine(lined);
+                                for (int i = 0; i < invoice2.Items.Count; i++)
+                                {
+                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice2.Items[i].ItemsID, invoice2.Items[i].ItemName, invoice2.Items[i].ItemPrice, invoice2.Items[i].Quantity, invoice2.Items[i].ItemPrice * (decimal)invoice2.Items[i].Quantity);
+                                    Console.WriteLine(lined);
+                                }
+                                Console.Write("Are you sure you want to payment ? (yes/no) : ");
                                 answer3 = Console.ReadLine();
                                 do
                                 {
@@ -1010,17 +1258,29 @@ namespace ConsoleApp
                                         if (result)
                                         {
                                             Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│             ");
                                             Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.WriteLine("Payment Complete!");
+                                            Console.Write("Payment Complete!");
                                             Console.ResetColor();
+                                            Console.WriteLine("                │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                                             Console.Write("Press any key to continue...");
                                             Console.ReadKey();
                                         }
                                         else
                                         {
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│            ");
                                             Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine("Payment Not Complete!");
+                                            Console.Write("Payment Not Complete!");
                                             Console.ResetColor();
+                                            Console.WriteLine("             │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
                                             Console.Write("Press any key to continue...");
                                             Console.ReadKey();
                                         }
@@ -1032,14 +1292,28 @@ namespace ConsoleApp
                                     }
                                     else
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Red;
                                         Console.Write("Invalid input, re-enter : ");
+                                        Console.ResetColor();
                                         answer3 = Console.ReadLine();
                                     }
                                 } while (answer3 != "no");
                                 break;
                             case 2://Cancel
                                 Console.Clear();
-                                Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
+                                Console.WriteLine(lined);
+                                Console.WriteLine("│\t\t\t      Order {0} Cancel      \t\t\t   │", chooseidinvoice);
+                                Console.WriteLine(lined);
+                                Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
+                                Console.WriteLine(lined);
+                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                                Console.WriteLine(lined);
+                                for (int i = 0; i < invoice2.Items.Count; i++)
+                                {
+                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice2.Items[i].ItemsID, invoice2.Items[i].ItemName, invoice2.Items[i].ItemPrice, invoice2.Items[i].Quantity, invoice2.Items[i].ItemPrice * (decimal)invoice2.Items[i].Quantity);
+                                    Console.WriteLine(lined);
+                                }
+                                Console.Write("Are you sure you want to cancel ? (yes/no) : ");
                                 answer4 = Console.ReadLine();
                                 do
                                 {
@@ -1048,20 +1322,11 @@ namespace ConsoleApp
                                         bool result = invoicesBL.GetCancelInvoice(chooseidinvoice);
                                         if (result)
                                         {
-                                            Console.Clear();
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.WriteLine("Cancel Invoice Complete!");
-                                            Console.ResetColor();
-                                            Console.Write("Press any key to continue...");
-                                            Console.ReadKey();
+
                                         }
                                         else
                                         {
-                                            Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine("Cancel Invoice Fail!");
-                                            Console.ResetColor();
-                                            Console.Write("Press any key to continue...");
-                                            Console.ReadKey();
+
                                         }
                                         break;
                                     }
@@ -1071,7 +1336,9 @@ namespace ConsoleApp
                                     }
                                     else
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Red;
                                         Console.Write("Invalid input, re-enter : ");
+                                        Console.ResetColor();
                                         answer4 = Console.ReadLine();
                                     }
                                 } while (answer4 != "no");
@@ -1089,9 +1356,15 @@ namespace ConsoleApp
                                     if (item == null)
                                     {
                                         Console.Clear();
+                                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                        Console.WriteLine("│                                              │");
+                                        Console.Write("│             ");
                                         Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine(" Dishes Id Invalid!");
+                                        Console.Write("Dishes Id Invalid!");
                                         Console.ResetColor();
+                                        Console.WriteLine("               │");
+                                        Console.WriteLine("│                                              │");
+                                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                                         Console.Write("Press any key to continue...");
                                         Console.ReadKey();
                                     }
@@ -1102,9 +1375,8 @@ namespace ConsoleApp
                                         while (quantitydishes < 0 || quantitydishes > 100)
                                         {
                                             Console.ForegroundColor = ConsoleColor.Red;
-                                            Console.WriteLine("Invalid quantity!");
+                                            Console.Write("Invalid input, re-enter : ");
                                             Console.ResetColor();
-                                            Console.Write("Try again : ");
                                             quantitydishes = int.Parse(Console.ReadLine());
                                         }
                                         bool result2 = false;
@@ -1121,7 +1393,6 @@ namespace ConsoleApp
                                             bool move = invoicesBL.UpdateQuantityItem(choosedishes, chooseidinvoice, quantitydishes);
                                             if (move)
                                             {
-
                                             }
                                             else
                                             {
@@ -1141,7 +1412,7 @@ namespace ConsoleApp
                                             }
                                         }
                                         Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine("Added Successfully");
+                                        Console.Write("Added Successfully!");
                                         Console.ResetColor();
                                     }
                                 }
@@ -1155,9 +1426,15 @@ namespace ConsoleApp
                                 if (item2 == null)
                                 {
                                     Console.Clear();
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                    Console.WriteLine("│                                              │");
+                                    Console.Write("│             ");
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine(" Dishes Id Invalid!");
+                                    Console.Write("Dishes Id Invalid!");
                                     Console.ResetColor();
+                                    Console.WriteLine("               │");
+                                    Console.WriteLine("│                                              │");
+                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
                                     Console.Write("Press any key to continue...");
                                     Console.ReadKey();
                                 }
@@ -1167,17 +1444,30 @@ namespace ConsoleApp
                                     if (make)
                                     {
                                         Console.Clear();
+                                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                        Console.WriteLine("│                                              │");
+                                        Console.Write("│             ");
                                         Console.ForegroundColor = ConsoleColor.Green;
-                                        Console.WriteLine("Remove Complete!");
+                                        Console.Write("Remove Complete!");
                                         Console.ResetColor();
+                                        Console.WriteLine("                 │");
+                                        Console.WriteLine("│                                              │");
+                                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                                         Console.Write("Press any key to continue...");
                                         Console.ReadKey();
                                     }
                                     else
                                     {
+                                        Console.Clear();
+                                        Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                        Console.WriteLine("│                                              │");
+                                        Console.Write("│               ");
                                         Console.ForegroundColor = ConsoleColor.Red;
-                                        Console.WriteLine("Remove Fail!");
+                                        Console.Write("Remove Fail!");
                                         Console.ResetColor();
+                                        Console.WriteLine("                   │");
+                                        Console.WriteLine("│                                              │");
+                                        Console.WriteLine("┼──────────────────────────────────────────────┼");
                                         Console.Write("Press any key to continue...");
                                         Console.ReadKey();
                                     }
