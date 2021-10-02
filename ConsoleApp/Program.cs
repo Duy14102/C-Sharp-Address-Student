@@ -151,18 +151,22 @@ namespace ConsoleApp
                 }
                 else
                 {
+                    decimal a = 0;
                     string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
                     Console.Clear();
                     Console.WriteLine(lined);
                     Console.WriteLine("│\t\t\t\tInvoice {0} History\t\t\t   │", choosehistory);
                     Console.WriteLine(lined);
-                    Console.WriteLine("│ {0,-5} │ {1,-23} │ {2,-10} │ {3,-10} │ {4,-12} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                    Console.WriteLine("│ {0,-5} │ {1,-23} │ {2,-10} │ {3,-10} │ {4,-12} │", "Id", "Name", "Price", "Quantity", "Amount");
                     Console.WriteLine(lined);
                     for (int i = 0; i < invoice.Items.Count; i++)
                     {
                         Console.WriteLine("│ {0,-5} │ {1,-23} │ {2,-10} │ {3,-10} │ {4,-12} │", invoice.Items[i].ItemsID, invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
                         Console.WriteLine(lined);
+                        a += invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity;
                     }
+                    Console.WriteLine("│\t\t\t\t\t        Total Price : {0,-13}│", a);
+                    Console.WriteLine(lined);
                     Console.WriteLine("Press any key to back to menu...");
                     Console.ReadKey();
                 }
@@ -911,7 +915,7 @@ namespace ConsoleApp
                                 case 1://payment
                                     Console.Clear();
                                     Console.WriteLine(lined);
-                                    Console.WriteLine("│\t\t\t      POPULAR RICE SYSTEM      \t\t\t   │");
+                                    Console.WriteLine("│\t\t\t          PAYMENT      \t\t\t\t   │");
                                     Console.WriteLine(lined);
                                     Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
                                     Console.WriteLine(lined);
@@ -979,7 +983,7 @@ namespace ConsoleApp
                                 case 2://Cancel
                                     Console.Clear();
                                     Console.WriteLine(lined);
-                                    Console.WriteLine("│\t\t\t      POPULAR RICE SYSTEM      \t\t\t   │");
+                                    Console.WriteLine("│\t\t\t\t   CANCEL      \t\t\t\t   │");
                                     Console.WriteLine(lined);
                                     Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
                                     Console.WriteLine(lined);
@@ -1227,7 +1231,7 @@ namespace ConsoleApp
                             case 1://payment
                                 Console.Clear();
                                 Console.WriteLine(lined);
-                                Console.WriteLine("│\t\t\t      Order {0} Payment      \t\t\t   │", chooseidinvoice);
+                                Console.WriteLine("│\t\t\t          PAYMENT      \t\t\t\t   │");
                                 Console.WriteLine(lined);
                                 Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
                                 Console.WriteLine(lined);
@@ -1294,7 +1298,7 @@ namespace ConsoleApp
                             case 2://Cancel
                                 Console.Clear();
                                 Console.WriteLine(lined);
-                                Console.WriteLine("│\t\t\t      Order {0} Cancel      \t\t\t   │", chooseidinvoice);
+                                Console.WriteLine("│\t\t\t\t   CANCEL      \t\t\t\t   │");
                                 Console.WriteLine(lined);
                                 Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
                                 Console.WriteLine(lined);
