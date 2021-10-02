@@ -878,18 +878,22 @@ namespace ConsoleApp
                         }
                         else
                         {
+                            decimal a = 0;
                             string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
                             Console.Clear();
                             Console.WriteLine(lined);
                             Console.WriteLine("│\t\t\t          Order {0}            \t\t\t   │", chooseinvoice);
                             Console.WriteLine(lined);
-                            Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                            Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
                             Console.WriteLine(lined);
                             for (int i = 0; i < invoice.Items.Count; i++)
                             {
                                 Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice.Items[i].ItemsID, invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
                                 Console.WriteLine(lined);
+                                a += invoice.Items[i].ItemPrice * invoice.Items[i].Quantity;
                             }
+                            Console.WriteLine("│\t\t\t\t\t       Total Price : {0,-14}│", a);
+                            Console.WriteLine(lined);
                             Console.WriteLine("│ 1. Payment\t\t\t\t\t\t\t\t   │\n│ 2. Cancel Invoice\t\t\t\t\t\t\t   │\n│ 3. Add dishes\t\t\t\t\t\t\t\t   │\n│ 4. Remove dishes\t\t\t\t\t\t\t   │\n│ 5. Back to menu\t\t\t\t\t\t\t   │");
                             Console.WriteLine(lined);
                             Console.WriteLine();
@@ -907,18 +911,20 @@ namespace ConsoleApp
                                 case 1://payment
                                     Console.Clear();
                                     Console.WriteLine(lined);
-                                    Console.WriteLine("│\t\t\t      Order {0} Payment      \t\t\t   │", chooseinvoice);
+                                    Console.WriteLine("│\t\t\t      POPULAR RICE SYSTEM      \t\t\t   │");
                                     Console.WriteLine(lined);
                                     Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
                                     Console.WriteLine(lined);
-                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
                                     Console.WriteLine(lined);
                                     for (int i = 0; i < invoice.Items.Count; i++)
                                     {
                                         Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice.Items[i].ItemsID, invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
                                         Console.WriteLine(lined);
                                     }
-                                    Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
+                                    Console.WriteLine("│\t\t\t\t\t       Total Price : {0,-14}│", a);
+                                    Console.WriteLine(lined);
+                                    Console.Write("Are you sure you want to payment? (yes/no) : ");
                                     answer1 = Console.ReadLine();
                                     do
                                     {
@@ -973,18 +979,18 @@ namespace ConsoleApp
                                 case 2://Cancel
                                     Console.Clear();
                                     Console.WriteLine(lined);
-                                    Console.WriteLine("│\t\t\t      Order {0} Cancel      \t\t\t   │", chooseinvoice);
+                                    Console.WriteLine("│\t\t\t      POPULAR RICE SYSTEM      \t\t\t   │");
                                     Console.WriteLine(lined);
                                     Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
                                     Console.WriteLine(lined);
-                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
                                     Console.WriteLine(lined);
                                     for (int i = 0; i < invoice.Items.Count; i++)
                                     {
                                         Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice.Items[i].ItemsID, invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
                                         Console.WriteLine(lined);
                                     }
-                                    Console.Write("Are you sure what you are about to do is correct? (yes/no) : ");
+                                    Console.Write("Are you sure you want to cancel ? (yes/no) : ");
                                     answer2 = Console.ReadLine();
                                     do
                                     {
@@ -1188,18 +1194,22 @@ namespace ConsoleApp
                     }
                     else
                     {
+                        decimal a = 0;
                         string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
                         Console.Clear();
                         Console.WriteLine(lined);
-                        Console.WriteLine("│\t\t\t          Order {0}            \t\t\t   │", chooseidinvoice);
+                        Console.WriteLine("│\t\t\t         ORDER {0}           \t\t\t   │", chooseidinvoice);
                         Console.WriteLine(lined);
-                        Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                        Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
                         Console.WriteLine(lined);
                         for (int i = 0; i < invoice2.Items.Count; i++)
                         {
                             Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice2.Items[i].ItemsID, invoice2.Items[i].ItemName, invoice2.Items[i].ItemPrice, invoice2.Items[i].Quantity, invoice2.Items[i].ItemPrice * (decimal)invoice2.Items[i].Quantity);
                             Console.WriteLine(lined);
+                            a += invoice2.Items[i].ItemPrice * (decimal)invoice2.Items[i].Quantity;
                         }
+                        Console.WriteLine("│\t\t\t\t\t       Total Price : {0,-14}│", a);
+                        Console.WriteLine(lined);
                         Console.WriteLine("│ 1. Payment\t\t\t\t\t\t\t\t   │\n│ 2. Cancel Invoice\t\t\t\t\t\t\t   │\n│ 3. Add dishes\t\t\t\t\t\t\t\t   │\n│ 4. Remove dishes\t\t\t\t\t\t\t   │\n│ 5. Back to menu\t\t\t\t\t\t\t   │");
                         Console.WriteLine(lined);
                         Console.WriteLine();
@@ -1221,13 +1231,15 @@ namespace ConsoleApp
                                 Console.WriteLine(lined);
                                 Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
                                 Console.WriteLine(lined);
-                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
                                 Console.WriteLine(lined);
                                 for (int i = 0; i < invoice2.Items.Count; i++)
                                 {
                                     Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice2.Items[i].ItemsID, invoice2.Items[i].ItemName, invoice2.Items[i].ItemPrice, invoice2.Items[i].Quantity, invoice2.Items[i].ItemPrice * (decimal)invoice2.Items[i].Quantity);
                                     Console.WriteLine(lined);
                                 }
+                                Console.WriteLine("│\t\t\t\t\t       Total Price : {0,-14}│", a);
+                                Console.WriteLine(lined);
                                 Console.Write("Are you sure you want to payment ? (yes/no) : ");
                                 answer3 = Console.ReadLine();
                                 do
@@ -1286,7 +1298,7 @@ namespace ConsoleApp
                                 Console.WriteLine(lined);
                                 Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
                                 Console.WriteLine(lined);
-                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Amount", "TotalPrice");
+                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
                                 Console.WriteLine(lined);
                                 for (int i = 0; i < invoice2.Items.Count; i++)
                                 {

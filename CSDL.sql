@@ -141,6 +141,7 @@ Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices
  update Invoice_details set count = count + 1 where InvoicesID_FK = 1 and ItemsID_FK = 1;
  select i.ItemsID_FK, c.Items_Name, c.Items_Price, i.count from 
 Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK = 1;
+select sum(Items_Price * count) from Invoice_details where InvoicesID_FK = 1;
  
  
  select * from Category;
