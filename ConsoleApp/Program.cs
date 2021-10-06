@@ -54,14 +54,12 @@ namespace ConsoleApp
                     Console.ReadKey(true);
                 }
             } while (staff == null);
-            staff = new Staff() { Role = 1 };
-            staff.Role = 1;
-            staff = new Staff() { Role = 2 };
-            staff.Role = 2;
             switch (staff.Role)
             {
                 case Staff.STAFF_ROLE:
-                    string[] menuItemsStaff = { "CREATE ORDER\t\t\t   │", "TABLE MANAGEMENT\t\t\t   │", "MENU MANAGEMENT\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
+                    staff = new Staff() { Role = 1 };
+                    staff.Role = 1;
+                    string[] menuItemsStaff = { "CREATE ORDER\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
                     do
                     {
                         choice = Menu("POPULAR RICE SYSTEM", menuItemsStaff);
@@ -71,21 +69,17 @@ namespace ConsoleApp
                                 CreateOrder(staff);
                                 break;
                             case 2:
-                                CreateTable(staff);
-                                break;
-                            case 3:
-                                MenuManagement(staff);
-                                break;
-                            case 4:
                                 MenuInvoice(staff);
                                 break;
-                            case 5:
+                            case 3:
                                 History(staff);
                                 break;
                         }
                     } while (choice != menuItemsStaff.Length);
                     break;
                 case Staff.ADMIN_ROLE:
+                    staff = new Staff() { Role = 2 };
+                    staff.Role = 2;
                     string[] menuItemsAdmin = { "CREATE ORDER\t\t\t   │", "TABLE MANAGEMENT\t\t\t   │", "MENU MANAGEMENT\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
                     List<TableFood> tablesAdmin = new List<TableFood>();
                     do
@@ -1341,11 +1335,33 @@ namespace ConsoleApp
                                         bool result = invoicesBL.GetCancelInvoice(chooseidinvoice);
                                         if (result)
                                         {
-
+                                            Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│          ");
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.Write("Cancel Invoice Complete!");
+                                            Console.ResetColor();
+                                            Console.WriteLine("            │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
                                         }
                                         else
                                         {
-
+                                            Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│            ");
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.Write("Cancel Invoice Fail!");
+                                            Console.ResetColor();
+                                            Console.WriteLine("              │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
                                         }
                                         break;
                                     }

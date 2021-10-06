@@ -31,7 +31,6 @@ namespace DAL
 
                 }
             }
-            // Console.WriteLine(login);
             return _staff;
         }
         public int Insert(Staff staff)

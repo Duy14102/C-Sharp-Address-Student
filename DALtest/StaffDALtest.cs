@@ -12,15 +12,15 @@ namespace DALtest
         [Fact]
         public void LoginTest1()
         {
-            staff.Username = "staffpf13";
-            staff.Userpass = "staff1234";
-            int expected = 1;
+            staff.Username = "adminpf13";
+            staff.Userpass = "admin1234";
+            int expected = 2;
             int result = staffDAL.Login(staff).Role;
             Assert.True(expected == result);
         }
         [Theory]
-        [InlineData("pf13", "vtcapf13", 2)]
-        [InlineData("pf14", "vtcapf14", 2)]
+        [InlineData("pf13", "vtcapf13", 1)]
+        [InlineData("staffpf13", "staff1234", 1)]
         public void LoginTest2(string userName, string pass, int expected)
         {
             staff.Username = userName;

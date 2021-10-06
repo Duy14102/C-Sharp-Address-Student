@@ -59,17 +59,17 @@ create table Staffs(
  select c.Items_Name, c.Items_Price, i.count from 
 Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK =5;
 
- create user if not exists 'staffpf13'@'localhost' identified by 'staff1234';
- grant all on ProjectCSDL.* to 'staffpf13'@'localhost';
+ -- create user if not exists 'staffpf13'@'localhost' identified by 'staff12341234';
+ -- grant all on ProjectCSDL.* to 'manager'@'localhost';
  
  create user if not exists 'adminpf13'@'localhost' identified by 'admin1234';
  grant all on ProjectCSDL.* to 'adminpf13'@'localhost';
  
- select md5('admin1234');
+ select md5('staff1234');
  
- insert into Staffs(Username, Userpass, StaffName) values ('staffpf13', '04d4b37015f6ba05077ae49776a76b95', 'staff');
  insert into Staffs(Username, Userpass, StaffName) values ('adminpf13', 'c93ccd78b2076528346216b3b2f701e6', 'admin');
- update Staffs set role = 2 where StaffID = 2;
+ insert into Staffs(Username, Userpass, StaffName) values ('staffpf13', '04d4b37015f6ba05077ae49776a76b95', 'staff');
+ update Staffs set role = 2 where StaffID = 1;
  
  insert into TableFood(Tables_Name) values ('Table 1');
  insert into TableFood(Tables_Name) values ('Table 2');
