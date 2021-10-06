@@ -755,6 +755,11 @@ namespace ConsoleApp
                             }
                             else
                             {
+                                Console.WriteLine("┼────────────────────────────────────────────────────────────────┼");
+                                Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-10} │ {3,-13} │", "Id", "Name", "Price", "Category");
+                                Console.WriteLine("┼────────────────────────────────────────────────────────────────┼");
+                                Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-10} │ {3,-13} │", item.ItemsID, item.ItemName, item.ItemPrice, item.CategoryInfo.CategoryName);
+                                Console.WriteLine("┼────────────────────────────────────────────────────────────────┼");
                                 Console.Write("How many (maximum 100): ");
                                 int quantitydishes = int.Parse(Console.ReadLine());
                                 while (quantitydishes < 1 || quantitydishes > 100)
