@@ -943,15 +943,24 @@ namespace ConsoleApp
                                             if (resultpayment)
                                             {
                                                 Console.Clear();
-                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                                Console.WriteLine("│                                              │");
-                                                Console.Write("│             ");
-                                                Console.ForegroundColor = ConsoleColor.Green;
-                                                Console.Write("Payment Complete!");
-                                                Console.ResetColor();
-                                                Console.WriteLine("                │");
-                                                Console.WriteLine("│                                              │");
-                                                Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                                Console.WriteLine(lined);
+                                                Console.WriteLine("│\t\t\t    POPULAR RICE SYSTEM      \t\t\t   │");
+                                                Console.WriteLine("│\t\t\t┼─────────────────────────┼\t\t\t   │");
+                                                Console.WriteLine("│\t\t\t          INVOICE      \t\t\t\t   │");
+                                                Console.WriteLine(lined);
+                                                Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
+                                                Console.WriteLine(lined);
+                                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                                                Console.WriteLine(lined);
+                                                for (int i = 0; i < invoice.Items.Count; i++)
+                                                {
+                                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice.Items[i].ItemsID, invoice.Items[i].ItemName, invoice.Items[i].ItemPrice, invoice.Items[i].Quantity, invoice.Items[i].ItemPrice * (decimal)invoice.Items[i].Quantity);
+                                                    Console.WriteLine(lined);
+                                                }
+                                                Console.WriteLine("│\t\t\t\t\t       Total Price : {0,-14}│", a);
+                                                Console.WriteLine(lined);
+                                                Console.WriteLine("│\t\t\t Thanks, Have a nice day!\t\t\t   │");
+                                                Console.WriteLine(lined);
                                                 Console.Write("Press any key to continue...");
                                                 Console.ReadKey();
                                             }
@@ -1259,15 +1268,24 @@ namespace ConsoleApp
                                         if (result)
                                         {
                                             Console.Clear();
-                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                            Console.WriteLine("│                                              │");
-                                            Console.Write("│             ");
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.Write("Payment Complete!");
-                                            Console.ResetColor();
-                                            Console.WriteLine("                │");
-                                            Console.WriteLine("│                                              │");
-                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine(lined);
+                                            Console.WriteLine("│\t\t\t    POPULAR RICE SYSTEM      \t\t\t   │");
+                                            Console.WriteLine("│\t\t\t┼─────────────────────────┼\t\t\t   │");
+                                            Console.WriteLine("│\t\t\t          INVOICE      \t\t\t\t   │");
+                                            Console.WriteLine(lined);
+                                            Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
+                                            Console.WriteLine(lined);
+                                            Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                                            Console.WriteLine(lined);
+                                            for (int i = 0; i < invoice2.Items.Count; i++)
+                                            {
+                                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", invoice2.Items[i].ItemsID, invoice2.Items[i].ItemName, invoice2.Items[i].ItemPrice, invoice2.Items[i].Quantity, invoice2.Items[i].ItemPrice * (decimal)invoice2.Items[i].Quantity);
+                                                Console.WriteLine(lined);
+                                            }
+                                            Console.WriteLine("│\t\t\t\t\t       Total Price : {0,-14}│", a);
+                                            Console.WriteLine(lined);
+                                            Console.WriteLine("│\t\t\t Thanks, Have a nice day!\t\t\t   │");
+                                            Console.WriteLine(lined);
                                             Console.Write("Press any key to continue...");
                                             Console.ReadKey();
                                         }
