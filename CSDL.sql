@@ -130,8 +130,7 @@ Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices
  select md5('vtcapf13');
  select md5('vtcapf14');
  select md5('VTCAcademy');
- insert into Staffs(Username, Userpass, StaffName, role) values ('pf13', 'd4248dec94ac2cc3b378ad76ea8bea96', 'Admin', 2);
- insert into Staffs(Username, Userpass, StaffName, role) values ('pf14', '2d24f14b4f6d8aeb67c948326b27a607', 'Admin2', 2);
+ insert into Staffs(Username, Userpass, StaffName, role) values ('pf13', 'd4248dec94ac2cc3b378ad76ea8bea96', 'Admin', 1);
   select * from Staffs;
  
  select * from Invoice_details;

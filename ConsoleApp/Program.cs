@@ -59,7 +59,7 @@ namespace ConsoleApp
                 case Staff.STAFF_ROLE:
                     staff = new Staff() { Role = 1 };
                     staff.Role = 1;
-                    string[] menuItemsStaff = { "CREATE ORDER\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
+                    string[] menuItemsStaff = { "CREATE ORDER\t\t\t\t\t       │", "INVOICE\t\t\t\t\t\t       │", "HISTORY\t\t\t\t\t\t       │", "EXIT\t\t\t\t\t\t       │" };
                     do
                     {
                         choice = Menu("POPULAR RICE SYSTEM", menuItemsStaff);
@@ -80,7 +80,7 @@ namespace ConsoleApp
                 case Staff.ADMIN_ROLE:
                     staff = new Staff() { Role = 2 };
                     staff.Role = 2;
-                    string[] menuItemsAdmin = { "CREATE ORDER\t\t\t   │", "TABLE MANAGEMENT\t\t\t   │", "MENU MANAGEMENT\t\t\t   │", "INVOICE\t\t\t\t   │", "HISTORY\t\t\t\t   │", "EXIT\t\t\t\t   │" };
+                    string[] menuItemsAdmin = { "CREATE ORDER\t\t\t\t\t       │", "TABLE MANAGEMENT\t\t\t\t       │", "MENU MANAGEMENT\t\t\t\t\t       │", "INVOICE\t\t\t\t\t\t       │", "HISTORY\t\t\t\t\t\t       │", "EXIT\t\t\t\t\t\t       │" };
                     List<TableFood> tablesAdmin = new List<TableFood>();
                     do
                     {
@@ -178,7 +178,17 @@ namespace ConsoleApp
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t   │", "", title);
             Console.WriteLine("│\t\t\t\t\t\t\t   │");
             Console.WriteLine(line);
-            Console.WriteLine("│  1. Add Item\t\t\t\t\t\t   │\n│  2. Remove Item\t\t\t\t\t   │\n│  3. Get item by id\t\t\t\t\t   │\n│  4. Get item by name\t\t\t\t\t   │\n│  5. Get all item\t\t\t\t\t   │\n│  6. Exit to main menu\t\t\t\t\t   │");
+            Console.WriteLine("│  1  │ Add Item\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  2  │ Remove Item\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  3  │ Get item by id\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  4  │ Get item by name\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  5  │ Get all item\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  6  │ Exit to main menu\t\t\t\t   │");
             Console.WriteLine(line);
             Console.WriteLine();
             Console.Write("  ───> Your choice : ");
@@ -433,7 +443,17 @@ namespace ConsoleApp
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t   │", "", title);
             Console.WriteLine("│\t\t\t\t\t\t\t   │");
             Console.WriteLine(line);
-            Console.WriteLine("│  1. Add Table\t\t\t\t\t\t   │\n│  2. Remove Table\t\t\t\t\t   │\n│  3. Get table by id\t\t\t\t\t   │\n│  4. Get table by name\t\t\t\t\t   │\n│  5. Get all table\t\t\t\t\t   │\n│  6. Exit to main menu\t\t\t\t\t   │");
+            Console.WriteLine("│  1  │ Add Table\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  2  │ Remove Table\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  3  │ Get table by id\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  4  │ Get table by name\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  5  │ Get all table\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  6  │ Exit to main menu\t\t\t\t   │");
             Console.WriteLine(line);
             Console.WriteLine();
             Console.Write("  ───> Your choice : ");
@@ -834,7 +854,11 @@ namespace ConsoleApp
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t   │", "", title);
             Console.WriteLine("│\t\t\t\t\t\t\t   │");
             Console.WriteLine(line);
-            Console.WriteLine("│  1. Show List Order\t\t\t\t\t   │\n│  2. Show Order By ID\t\t\t\t\t   │\n│  3. Back to menu\t\t\t\t\t   │");
+            Console.WriteLine("│  1  │ Show List Order\t\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  2  │ Show Order By ID\t\t\t\t   │");
+            Console.WriteLine(line);
+            Console.WriteLine("│  3  │ Back to menu\t\t\t\t\t   │");
             Console.WriteLine(line);
             Console.WriteLine();
             Console.Write("  ───> Your choice : ");
@@ -885,7 +909,7 @@ namespace ConsoleApp
                             string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
                             Console.Clear();
                             Console.WriteLine(lined);
-                            Console.WriteLine("│\t\t\t          Order {0}            \t\t\t   │", chooseinvoice);
+                            Console.WriteLine("│\t\t\t          ORDER {0}            \t\t\t   │", chooseinvoice);
                             Console.WriteLine(lined);
                             Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
                             Console.WriteLine(lined);
@@ -897,7 +921,19 @@ namespace ConsoleApp
                             }
                             Console.WriteLine("│\t\t\t\t\t       Total Price : {0,-14}│", a);
                             Console.WriteLine(lined);
-                            Console.WriteLine("│ 1. Payment\t\t\t\t\t\t\t\t   │\n│ 2. Cancel Invoice\t\t\t\t\t\t\t   │\n│ 3. Add dishes\t\t\t\t\t\t\t\t   │\n│ 4. Remove dishes\t\t\t\t\t\t\t   │\n│ 5. Back to menu\t\t\t\t\t\t\t   │");
+                            Console.WriteLine("│\t\t\t\t\t\t\t\t\t   │");
+                            Console.WriteLine("│\t\t\t*****       OPTIONS       *****\t\t\t   │");
+                            Console.WriteLine("│\t\t\t\t\t\t\t\t\t   │");
+                            Console.WriteLine(lined);
+                            Console.WriteLine("│  1  │ Payment\t\t\t\t\t\t\t\t   │");
+                            Console.WriteLine(lined);
+                            Console.WriteLine("│  2  │ Cancel Invoice\t\t\t\t\t\t\t   │");
+                            Console.WriteLine(lined);
+                            Console.WriteLine("│  3  │ Add dishes\t\t\t\t\t\t\t   │");
+                            Console.WriteLine(lined);
+                            Console.WriteLine("│  4  │ Remove dishes\t\t\t\t\t\t\t   │");
+                            Console.WriteLine(lined);
+                            Console.WriteLine("│  5  │ Back to menu\t\t\t\t\t\t\t   │");
                             Console.WriteLine(lined);
                             Console.WriteLine();
                             Console.Write("  ───> Your choice : ");
@@ -1222,7 +1258,19 @@ namespace ConsoleApp
                         }
                         Console.WriteLine("│\t\t\t\t\t       Total Price : {0,-14}│", a);
                         Console.WriteLine(lined);
-                        Console.WriteLine("│ 1. Payment\t\t\t\t\t\t\t\t   │\n│ 2. Cancel Invoice\t\t\t\t\t\t\t   │\n│ 3. Add dishes\t\t\t\t\t\t\t\t   │\n│ 4. Remove dishes\t\t\t\t\t\t\t   │\n│ 5. Back to menu\t\t\t\t\t\t\t   │");
+                        Console.WriteLine("│\t\t\t\t\t\t\t\t\t   │");
+                        Console.WriteLine("│\t\t\t*****       OPTIONS       *****\t\t\t   │");
+                        Console.WriteLine("│\t\t\t\t\t\t\t\t\t   │");
+                        Console.WriteLine(lined);
+                        Console.WriteLine("│  1  │ Payment\t\t\t\t\t\t\t\t   │");
+                        Console.WriteLine(lined);
+                        Console.WriteLine("│  2  │ Cancel Invoice\t\t\t\t\t\t\t   │");
+                        Console.WriteLine(lined);
+                        Console.WriteLine("│  3  │ Add dishes\t\t\t\t\t\t\t   │");
+                        Console.WriteLine(lined);
+                        Console.WriteLine("│  4  │ Remove dishes\t\t\t\t\t\t\t   │");
+                        Console.WriteLine(lined);
+                        Console.WriteLine("│  5  │ Back to menu\t\t\t\t\t\t\t   │");
                         Console.WriteLine(lined);
                         Console.WriteLine();
                         Console.Write("  ───> Your Choice : ");
@@ -1589,19 +1637,19 @@ namespace ConsoleApp
         static int Menu(string title, string[] menuItems)
         {
             int choose = 0;
-            string line = "┼──────────────────────────────────────────┼";
+            string line = "┼──────────────────────────────────────────────────────────────┼";
             int position = line.Length / 2 - title.Length / 2;
             Console.Clear();
             Console.WriteLine(line);
-            Console.WriteLine("│                                          │");
-            Console.WriteLine("│{0," + position + "}\b{1}\t   │", "", title);
-            Console.WriteLine("│                                          │");
+            Console.WriteLine("│\t\t\t\t\t\t\t       │");
+            Console.WriteLine("│{0," + position + "}\b{1}\t\t       │", "", title);
+            Console.WriteLine("│\t\t\t\t\t\t\t       │");
             Console.WriteLine(line);
             for (int i = 0; i < menuItems.Length; i++)
             {
-                Console.WriteLine("│  {0}. {1}", i + 1, menuItems[i]);
+                Console.WriteLine("│  {0}  │ {1}", i + 1, menuItems[i]);
+                Console.WriteLine(line);
             }
-            Console.WriteLine(line);
             Console.Write("\n  ───> Your choice: ");
             while (true)
             {
