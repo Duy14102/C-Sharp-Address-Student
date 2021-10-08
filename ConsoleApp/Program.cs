@@ -114,16 +114,23 @@ namespace ConsoleApp
             int choosehistory;
             do
             {
+                string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
+                string len = "┼──────────────────────────────────────────────────────────────────┼";
+                string blen = "│                                                                  │";
                 Console.Clear();
                 invoices = invoicesBL.GetHistory();
                 if (invoices == null)
                 {
                     Console.Clear();
-                    Console.WriteLine("┼─────────────────────────────────┼");
-                    Console.WriteLine("│                                 │");
-                    Console.WriteLine("│        Nothing to show!         │");
-                    Console.WriteLine("│                                 │");
-                    Console.WriteLine("┼─────────────────────────────────┼");
+                    Console.WriteLine(len);
+                    Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                    Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                    Console.WriteLine("│\t\t\t\tHistory\t\t\t\t   │");
+                    Console.WriteLine(len);
+                    Console.WriteLine(blen);
+                    Console.WriteLine("│\t\t\t   Nothing to Show!\t\t\t   │");
+                    Console.WriteLine(blen);
+                    Console.WriteLine(len);
                     Console.Write("Press any key to continue...");
                     Console.ReadKey();
                     break;
@@ -146,7 +153,6 @@ namespace ConsoleApp
                 else
                 {
                     decimal a = 0;
-                    string lined = "┼──────────────────────────────────────────────────────────────────────────┼";
                     Console.Clear();
                     Console.WriteLine(lined);
                     Console.WriteLine("│\t\t\t\tInvoice {0} History\t\t\t   │", choosehistory);
@@ -174,9 +180,9 @@ namespace ConsoleApp
             string title = "MENU MANAGEMENT";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
-            Console.WriteLine("│\t\t\t\t\t\t\t   │");
+            Console.WriteLine("│\t\t     POPULAR RICE SYSTEM\t\t   │");
+            Console.WriteLine("│\t\t┼───────────────────────────┼\t\t   │");
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t   │", "", title);
-            Console.WriteLine("│\t\t\t\t\t\t\t   │");
             Console.WriteLine(line);
             Console.WriteLine("│  1  │ Add Item\t\t\t\t\t   │");
             Console.WriteLine(line);
@@ -439,9 +445,9 @@ namespace ConsoleApp
             string title = "TABLE MANAGEMENT";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
-            Console.WriteLine("│\t\t\t\t\t\t\t   │");
+            Console.WriteLine("│\t\t     POPULAR RICE SYSTEM\t\t   │");
+            Console.WriteLine("│\t\t┼───────────────────────────┼\t\t   │");
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t   │", "", title);
-            Console.WriteLine("│\t\t\t\t\t\t\t   │");
             Console.WriteLine(line);
             Console.WriteLine("│  1  │ Add Table\t\t\t\t\t   │");
             Console.WriteLine(line);
@@ -1612,6 +1618,8 @@ namespace ConsoleApp
             string title = "History";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
+            Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+            Console.WriteLine("│\t\t    ┼──────────────────────────┼\t\t   │");
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t\t   │", "", title);
             Console.WriteLine(line);
             Console.WriteLine("│ {0,-10} │ {1,-21} │ {2,-15} │ {3,-9} │", "ID", "Date", "Table", "Status");
