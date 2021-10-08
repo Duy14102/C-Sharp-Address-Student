@@ -151,7 +151,7 @@ namespace ConsoleApp
                     Console.WriteLine(lined);
                     Console.WriteLine("│\t\t\t\tInvoice {0} History\t\t\t   │", choosehistory);
                     Console.WriteLine(lined);
-                    Console.WriteLine("│ {0,-5} │ {1,-23} │ {2,-10} │ {3,-10} │ {4,-12} │", "Id", "Name", "Price", "Quantity", "Amount");
+                    Console.WriteLine("│ {0,-5} │ {1,-23} │ {2,-10} │ {3,-10} │ {4,-12} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                     Console.WriteLine(lined);
                     for (int i = 0; i < invoice.Items.Count; i++)
                     {
@@ -367,7 +367,7 @@ namespace ConsoleApp
                         Console.WriteLine(linet);
                         Console.WriteLine("│{0," + positiont + "}\b{1}\t\t\t\t\t│", "", titlet);
                         Console.WriteLine(linet);
-                        Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price", "Category");
+                        Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price(Vnd)", "Category");
                         Console.WriteLine(linet);
                         Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3, -15} │", itemId.ItemsID, itemId.ItemName, itemId.ItemPrice, itemId.CategoryInfo.CategoryName);
                         Console.WriteLine(linet);
@@ -770,7 +770,7 @@ namespace ConsoleApp
                             else
                             {
                                 Console.WriteLine("┼────────────────────────────────────────────────────────────────┼");
-                                Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-10} │ {3,-13} │", "Id", "Name", "Price", "Category");
+                                Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-10} │ {3,-13} │", "Id", "Name", "Price(Vnd)", "Category");
                                 Console.WriteLine("┼────────────────────────────────────────────────────────────────┼");
                                 Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-10} │ {3,-13} │", item.ItemsID, item.ItemName, item.ItemPrice, item.CategoryInfo.CategoryName);
                                 Console.WriteLine("┼────────────────────────────────────────────────────────────────┼");
@@ -911,7 +911,7 @@ namespace ConsoleApp
                             Console.WriteLine(lined);
                             Console.WriteLine("│\t\t\t          ORDER {0}            \t\t\t   │", chooseinvoice);
                             Console.WriteLine(lined);
-                            Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                            Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                             Console.WriteLine(lined);
                             for (int i = 0; i < invoice.Items.Count; i++)
                             {
@@ -954,7 +954,7 @@ namespace ConsoleApp
                                     Console.WriteLine(lined);
                                     Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
                                     Console.WriteLine(lined);
-                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                                     Console.WriteLine(lined);
                                     for (int i = 0; i < invoice.Items.Count; i++)
                                     {
@@ -980,7 +980,7 @@ namespace ConsoleApp
                                                 Console.WriteLine(lined);
                                                 Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
                                                 Console.WriteLine(lined);
-                                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                                                 Console.WriteLine(lined);
                                                 for (int i = 0; i < invoice.Items.Count; i++)
                                                 {
@@ -1031,7 +1031,7 @@ namespace ConsoleApp
                                     Console.WriteLine(lined);
                                     Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice.Invoice_ID, invoice.Invoices_Date, invoice.table.Name);
                                     Console.WriteLine(lined);
-                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                                    Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                                     Console.WriteLine(lined);
                                     for (int i = 0; i < invoice.Items.Count; i++)
                                     {
@@ -1248,7 +1248,7 @@ namespace ConsoleApp
                         Console.WriteLine(lined);
                         Console.WriteLine("│\t\t\t         ORDER {0}           \t\t\t   │", chooseidinvoice);
                         Console.WriteLine(lined);
-                        Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                        Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                         Console.WriteLine(lined);
                         for (int i = 0; i < invoice2.Items.Count; i++)
                         {
@@ -1291,7 +1291,7 @@ namespace ConsoleApp
                                 Console.WriteLine(lined);
                                 Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
                                 Console.WriteLine(lined);
-                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                                 Console.WriteLine(lined);
                                 for (int i = 0; i < invoice2.Items.Count; i++)
                                 {
@@ -1317,7 +1317,7 @@ namespace ConsoleApp
                                             Console.WriteLine(lined);
                                             Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
                                             Console.WriteLine(lined);
-                                            Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                                            Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                                             Console.WriteLine(lined);
                                             for (int i = 0; i < invoice2.Items.Count; i++)
                                             {
@@ -1367,7 +1367,7 @@ namespace ConsoleApp
                                 Console.WriteLine(lined);
                                 Console.WriteLine("│ Order Id : {0, -62}│\n│ Date : {1, -66}│\n│ Table : {2, -65}│", invoice2.Invoice_ID, invoice2.Invoices_Date, invoice2.table.Name);
                                 Console.WriteLine(lined);
-                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price", "Quantity", "Amount");
+                                Console.WriteLine("│ {0,-5} │ {1,-22} │ {2,-10} │ {3,-10} │ {4,-13} │", "Id", "Name", "Price(Vnd)", "Quantity", "Amount");
                                 Console.WriteLine(lined);
                                 for (int i = 0; i < invoice2.Items.Count; i++)
                                 {
@@ -1670,7 +1670,7 @@ namespace ConsoleApp
             Console.WriteLine(line);
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t\t\t│", "", title);
             Console.WriteLine(line);
-            Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price", "Category");
+            Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price(Vnd)", "Category");
             Console.WriteLine(line);
             for (int i = 0; i < items.Count; i++)
             {
