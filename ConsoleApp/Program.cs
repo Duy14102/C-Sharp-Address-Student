@@ -592,7 +592,7 @@ namespace ConsoleApp
                     break;
                 case 3:
                     Console.Clear();
-                    Console.Write("Input Item ID to search or input 0 to exit to menu : ");
+                    Console.Write("Input Table ID to search or input 0 to exit to menu : ");
                     int id = GetID();
                     if (id == 0) break;
                     TableFood tableFood2 = tableBL.GetById(id);
