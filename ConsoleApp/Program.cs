@@ -751,9 +751,10 @@ namespace ConsoleApp
                         Console.Clear();
                         invoice.table = table;
                         items = itemBL.GetItems();
-                        DisplayItem(items);
+                        // DisplayItem(items);
                         while (true)
                         {
+                            DisplayItem(items);
                             Console.Write("Input ID to add dishes and input 0 to finish order : ");
                             choosedishes = GetID();
                             if (choosedishes == 0) break;
