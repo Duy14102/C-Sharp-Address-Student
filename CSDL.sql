@@ -185,6 +185,9 @@ where Items_Name like concat('%',@Items_Name,'%');
 select LAST_INSERT_ID();
 
 select * from TableFood;
+select * from Invoice_details;
+select i.ItemsID_FK, c.Items_Name, c.Items_Price, i.count from 
+Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.ItemsID_FK = 2 and i.InvoicesID_FK = 1;
  
  select * from TableFood where Tables_Status = 2;
 select * from Staffs where Username='staffpf13' and Userpass='04d4b37015f6ba05077ae49776a76b95';

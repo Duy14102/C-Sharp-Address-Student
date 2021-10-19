@@ -278,6 +278,51 @@ namespace DAL
                 return result;
             }
         }
+        public Invoice GetRemoveID(int itemId, int invoiceId)
+        {
+            Invoice invoices = null;
+            lock (connection)
+            {
+                try
+                {
+                    connection.Open();
+                    query = @"select i.Invoices_ID, i.Invoices_Date, c.Tables_Name, i.Invoices_Status from
+                    Invoices i inner join TableFood c on i.TableID_FK = c.Tables_ID where i.Invoices_Status = 1 and i.Invoices_ID = " + invoiceId + ";";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        invoices = GetInvoice(reader);
+                        reader.Close();
+                        query = @"select i.InvoicesID_FK, i.ItemsID_FK, c.Items_Name, c.Items_Price, i.count from 
+                                Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.InvoicesID_FK = '" + invoiceId + "'and i.ItemsID_FK = '" + itemId + "';";
+                        command.CommandText = query;
+                        reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            Item item = new Item();
+                            item.ItemsID = reader.GetInt32("ItemsID_FK");
+                            item.ItemName = reader.GetString("Items_Name");
+                            item.ItemPrice = reader.GetDecimal("Items_Price");
+                            item.Quantity = reader.GetInt32("count");
+                            invoices.Items.Add(item);
+                        }
+                    }
+                    reader.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    Console.ReadKey();
+                }
+                finally
+                {
+                    connection.Close();
+
+                }
+            }
+            return invoices;
+        }
         public bool GetCancelInvoice(int id)
         {
             bool result = false;

@@ -48,5 +48,9 @@ namespace BL
         {
             return invoicesDAL.removeitem(id);
         }
+        public Invoice GetRemoveID(int itemId, int invoiceId)
+        {
+            return invoicesDAL.GetRemoveID(itemId, invoiceId);
+        }
     }
 }
