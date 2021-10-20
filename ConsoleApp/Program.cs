@@ -176,7 +176,12 @@ namespace ConsoleApp
         {
             int chooseit;
             Console.Clear();
+            string linet = "┼───────────────────────────────────────────────────────────────────────┼";
+            string titlet = "MENU";
+            int positiont = linet.Length / 2 - titlet.Length / 2;
             string line = "┼──────────────────────────────────────────────────────────┼";
+            string len = "┼──────────────────────────────────────────────────────────────────┼";
+            string blen = "│                                                                  │";
             string title = "MENU MANAGEMENT";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
@@ -210,6 +215,13 @@ namespace ConsoleApp
             {
                 case 1:
                     Console.Clear();
+                    Console.WriteLine(len);
+                    Console.WriteLine(blen);
+                    Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                    Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                    Console.WriteLine("│\t\t\t      Create Item\t\t\t   │");
+                    Console.WriteLine(blen);
+                    Console.WriteLine(len);
                     Console.Write("Are you sure you want to add item ? (yes/no) : ");
                     string tookit = Console.ReadLine();
                     do
@@ -220,6 +232,13 @@ namespace ConsoleApp
                             Category category = new Category();
                             Item item = new Item();
                             Console.Clear();
+                            Console.WriteLine(len);
+                            Console.WriteLine(blen);
+                            Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                            Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                            Console.WriteLine("│\t\t\t      Create Item\t\t\t   │");
+                            Console.WriteLine(blen);
+                            Console.WriteLine(len);
                             Console.Write("Name of new item : ");
                             item.ItemName = Console.ReadLine();
                             Console.Write("Price of new item : ");
@@ -269,6 +288,13 @@ namespace ConsoleApp
                     break;
                 case 2:
                     Console.Clear();
+                    Console.WriteLine(len);
+                    Console.WriteLine(blen);
+                    Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                    Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                    Console.WriteLine("│\t\t\t      Remove Item\t\t\t   │");
+                    Console.WriteLine(blen);
+                    Console.WriteLine(len);
                     Console.Write("Are you sure you want to remove item ? (yes/no) : ");
                     string takeit = Console.ReadLine();
                     do
@@ -276,6 +302,13 @@ namespace ConsoleApp
                         if (takeit == "yes")
                         {
                             Console.Clear();
+                            Console.WriteLine(len);
+                            Console.WriteLine(blen);
+                            Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                            Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                            Console.WriteLine("│\t\t\t      Remove Item\t\t\t   │");
+                            Console.WriteLine(blen);
+                            Console.WriteLine(len);
                             Console.Write("Input Id of item to remove : ");
                             int getit = GetID();
                             Item item = itemBL.GetById(getit);
@@ -291,42 +324,67 @@ namespace ConsoleApp
                                 Console.WriteLine("                │");
                                 Console.WriteLine("│                                              │");
                                 Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                Console.Write("Press any key to continue...");
-                                Console.ReadKey();
+                                Console.Write("Re-enter : ");
+                                getit = GetID();
                             }
                             else
                             {
-                                bool wow = itemBL.RemoveItem(getit);
-                                if (wow)
+                                Console.WriteLine(linet);
+                                Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3,-15} │", "ID", "Name", "Price(Vnd)", "Category");
+                                Console.WriteLine(linet);
+                                Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3, -15} │", item.ItemsID, item.ItemName, item.ItemPrice, item.CategoryInfo.CategoryName);
+                                Console.WriteLine(linet);
+                                Console.Write("Are you sure you want to remove this item ? (yes/no) : ");
+                                string yesno = Console.ReadLine();
+                                do
                                 {
-                                    Console.Clear();
-                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                    Console.WriteLine("│                                              │");
-                                    Console.Write("│           ");
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("Remove Item Complete!");
-                                    Console.ResetColor();
-                                    Console.WriteLine("              │");
-                                    Console.WriteLine("│                                              │");
-                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                    Console.Write("Press any key to continue...");
-                                    Console.ReadKey();
-                                }
-                                else
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                    Console.WriteLine("│                                              │");
-                                    Console.Write("│              ");
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.Write("Remove Item Fail!");
-                                    Console.ResetColor();
-                                    Console.WriteLine("               │");
-                                    Console.WriteLine("│                                              │");
-                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                    Console.Write("Press any key to continue...");
-                                    Console.ReadKey();
-                                }
+                                    if (yesno == "yes")
+                                    {
+                                        bool wow = itemBL.RemoveItem(getit);
+                                        if (wow)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│           ");
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.Write("Remove Item Complete!");
+                                            Console.ResetColor();
+                                            Console.WriteLine("              │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
+                                        else
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│              ");
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.Write("Remove Item Fail!");
+                                            Console.ResetColor();
+                                            Console.WriteLine("               │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
+                                        break;
+                                    }
+                                    else if (yesno == "no")
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        Console.Write("Invalid input, re-enter : ");
+                                        Console.ResetColor();
+                                        yesno = Console.ReadLine();
+                                    }
+                                } while (yesno != "no");
                             }
                             break;
                         }
@@ -367,9 +425,6 @@ namespace ConsoleApp
                     else
                     {
                         Console.Clear();
-                        string linet = "┼───────────────────────────────────────────────────────────────────────┼";
-                        string titlet = "MENU";
-                        int positiont = linet.Length / 2 - titlet.Length / 2;
                         Console.WriteLine(linet);
                         Console.WriteLine("│{0," + positiont + "}\b{1}\t\t\t\t\t│", "", titlet);
                         Console.WriteLine(linet);
@@ -415,7 +470,7 @@ namespace ConsoleApp
                     List<Item> items = new List<Item>();
                     Console.Clear();
                     items = itemBL.GetItems();
-                    if (items == null)
+                    if (items.Count == 0)
                     {
                         Console.Clear();
                         Console.WriteLine("┼──────────────────────────────────────────────┼");
@@ -441,7 +496,12 @@ namespace ConsoleApp
         {
             int chooseit;
             Console.Clear();
+            string linek = "┼────────────────────────────────────────────────┼";
+            string titlek = "TABLES";
+            int positionk = linek.Length / 2 - titlek.Length / 2;
             string line = "┼──────────────────────────────────────────────────────────┼";
+            string len = "┼──────────────────────────────────────────────────────────────────┼";
+            string blen = "│                                                                  │";
             string title = "TABLE MANAGEMENT";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
@@ -475,6 +535,13 @@ namespace ConsoleApp
             {
                 case 1:
                     Console.Clear();
+                    Console.WriteLine(len);
+                    Console.WriteLine(blen);
+                    Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                    Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                    Console.WriteLine("│\t\t\t      Create Table\t\t\t   │");
+                    Console.WriteLine(blen);
+                    Console.WriteLine(len);
                     Console.Write("Are you sure you want to create new table ? (yes/no) : ");
                     string tookit = Console.ReadLine();
                     do
@@ -482,6 +549,13 @@ namespace ConsoleApp
                         if (tookit == "yes")
                         {
                             Console.Clear();
+                            Console.WriteLine(len);
+                            Console.WriteLine(blen);
+                            Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                            Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                            Console.WriteLine("│\t\t\t      Create Table\t\t\t   │");
+                            Console.WriteLine(blen);
+                            Console.WriteLine(len);
                             Console.Write("Name of new table : ");
                             string nametable = Console.ReadLine();
                             TableFood table = new TableFood { Name = nametable };
@@ -516,6 +590,13 @@ namespace ConsoleApp
                     break;
                 case 2:
                     Console.Clear();
+                    Console.WriteLine(len);
+                    Console.WriteLine(blen);
+                    Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                    Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                    Console.WriteLine("│\t\t\t      Remove Table\t\t\t   │");
+                    Console.WriteLine(blen);
+                    Console.WriteLine(len);
                     Console.Write("Are you sure you want to remove table ? (yes/no) : ");
                     string takeit = Console.ReadLine();
                     do
@@ -523,6 +604,13 @@ namespace ConsoleApp
                         if (takeit == "yes")
                         {
                             Console.Clear();
+                            Console.WriteLine(len);
+                            Console.WriteLine(blen);
+                            Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                            Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                            Console.WriteLine("│\t\t\t      Remove Table\t\t\t   │");
+                            Console.WriteLine(blen);
+                            Console.WriteLine(len);
                             Console.Write("Input Id of table to remove : ");
                             int getit = GetID();
                             TableFood tableFood = tableBL.GetById(getit);
@@ -531,49 +619,95 @@ namespace ConsoleApp
                                 Console.Clear();
                                 Console.WriteLine("┼──────────────────────────────────────────────┼");
                                 Console.WriteLine("│                                              │");
-                                Console.Write("│              ");
+                                Console.Write("│             ");
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.Write("Item Id invalid!");
+                                Console.Write("Table Id invalid!");
                                 Console.ResetColor();
                                 Console.WriteLine("                │");
                                 Console.WriteLine("│                                              │");
                                 Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                Console.Write("Re-enter : ");
+                                getit = GetID();
+                            }
+                            else if (tableFood.Status == 2)
+                            {
+                                string status;
+                                Console.WriteLine(linek);
+                                Console.WriteLine("│{0," + positionk + "}\b{1}\t\t\t │", "", titlek);
+                                Console.WriteLine(linek);
+                                Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", "ID", "Name", "Status");
+                                Console.WriteLine(linek);
+                                status = tableFood.Status == TableFood.READY_STATUS ? "Ready" : "In Use";
+                                Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", tableFood.TableId, tableFood.Name, status);
+                                Console.WriteLine(linek);
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("This table is inuse, cannot remove !");
+                                Console.ResetColor();
                                 Console.Write("Press any key to continue...");
                                 Console.ReadKey();
                             }
                             else
                             {
-                                bool wow = tableBL.RemoveItem(getit);
-                                if (wow)
+                                string status;
+                                Console.WriteLine(linek);
+                                Console.WriteLine("│{0," + positionk + "}\b{1}\t\t\t │", "", titlek);
+                                Console.WriteLine(linek);
+                                Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", "ID", "Name", "Status");
+                                Console.WriteLine(linek);
+                                status = tableFood.Status == TableFood.READY_STATUS ? "Ready" : "In Use";
+                                Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", tableFood.TableId, tableFood.Name, status);
+                                Console.WriteLine(linek);
+                                Console.Write("Are you sure you want to remove this table ? (yes/no) : ");
+                                string yesno = Console.ReadLine();
+                                do
                                 {
-                                    Console.Clear();
-                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                    Console.WriteLine("│                                              │");
-                                    Console.Write("│           ");
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.Write("Remove Table Complete!");
-                                    Console.ResetColor();
-                                    Console.WriteLine("             │");
-                                    Console.WriteLine("│                                              │");
-                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                    Console.Write("Press any key to continue...");
-                                    Console.ReadKey();
-                                }
-                                else
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                    Console.WriteLine("│                                              │");
-                                    Console.Write("│             ");
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.Write("Remove Table Fail!");
-                                    Console.ResetColor();
-                                    Console.WriteLine("               │");
-                                    Console.WriteLine("│                                              │");
-                                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                    Console.Write("Press any key to continue...");
-                                    Console.ReadKey();
-                                }
+                                    if (yesno == "yes")
+                                    {
+                                        bool wow = tableBL.RemoveItem(getit);
+                                        if (wow)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│           ");
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.Write("Remove Table Complete!");
+                                            Console.ResetColor();
+                                            Console.WriteLine("             │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
+                                        else
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.WriteLine("│                                              │");
+                                            Console.Write("│             ");
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.Write("Remove Table Fail!");
+                                            Console.ResetColor();
+                                            Console.WriteLine("               │");
+                                            Console.WriteLine("│                                              │");
+                                            Console.WriteLine("┼──────────────────────────────────────────────┼");
+                                            Console.Write("Press any key to continue...");
+                                            Console.ReadKey();
+                                        }
+                                        break;
+                                    }
+                                    else if (yesno == "no")
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        Console.Write("Invalid input, re-enter : ");
+                                        Console.ResetColor();
+                                        yesno = Console.ReadLine();
+                                    }
+                                } while (yesno != "no");
                             }
                             break;
                         }
@@ -615,9 +749,6 @@ namespace ConsoleApp
                     {
                         Console.Clear();
                         string status;
-                        string linek = "┼────────────────────────────────────────────────┼";
-                        string titlek = "TABLES";
-                        int positionk = linek.Length / 2 - titlek.Length / 2;
                         Console.WriteLine(linek);
                         Console.WriteLine("│{0," + positionk + "}\b{1}\t\t\t │", "", titlek);
                         Console.WriteLine(linek);
@@ -691,17 +822,24 @@ namespace ConsoleApp
             List<TableFood> tablesStaff = new List<TableFood>();
             Invoice invoice = new Invoice();
             int choosetable, choosedishes;
+            string len = "┼──────────────────────────────────────────────────────────────────┼";
+            string blen = "│                                                                  │";
             do
             {
                 Console.Clear();
                 tablesStaff = tableBL.GetAllTableFood();
                 if (tablesStaff == null)
                 {
-                    Console.WriteLine("┼──────────────────────────────────────────────┼");
-                    Console.WriteLine("│                                              │");
-                    Console.WriteLine("│               Nothing to show!               │");
-                    Console.WriteLine("│                                              │");
-                    Console.WriteLine("┼──────────────────────────────────────────────┼");
+                    Console.Clear();
+                    Console.WriteLine(len);
+                    Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                    Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                    Console.WriteLine("│\t\t\t       Tables\t\t\t\t   │");
+                    Console.WriteLine(len);
+                    Console.WriteLine(blen);
+                    Console.WriteLine("│\t\t None table exists, Create a new one!\t\t   │");
+                    Console.WriteLine(blen);
+                    Console.WriteLine(len);
                     Console.Write("Press any key to continue...");
                     Console.ReadKey();
                     break;
@@ -751,6 +889,22 @@ namespace ConsoleApp
                         Console.Clear();
                         invoice.table = table;
                         items = itemBL.GetItems();
+                        if (items.Count == 0)
+                        {
+                            Console.Clear();
+                            Console.WriteLine(len);
+                            Console.WriteLine("│\t\t\t POPULAR RICE SYSTEM\t\t\t   │");
+                            Console.WriteLine("│\t\t    ┼───────────────────────────┼\t\t   │");
+                            Console.WriteLine("│\t\t\t       Menu\t\t\t\t   │");
+                            Console.WriteLine(len);
+                            Console.WriteLine(blen);
+                            Console.WriteLine("│\t\t None item exists, Create a new one!\t\t   │");
+                            Console.WriteLine(blen);
+                            Console.WriteLine(len);
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        }
                         // DisplayItem(items);
                         while (true)
                         {

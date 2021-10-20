@@ -71,7 +71,7 @@ Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.Invoic
  insert into Staffs(Username, Userpass, StaffName) values ('staffpf13', '04d4b37015f6ba05077ae49776a76b95', 'staff');
  update Staffs set role = 2 where StaffID = 1;
  
- insert into TableFood(Tables_Name) values ('Table 1');
+ /*insert into TableFood(Tables_Name) values ('Table 1');
  insert into TableFood(Tables_Name) values ('Table 2');
  insert into TableFood(Tables_Name) values ('Table 3');
  insert into TableFood(Tables_Name) values ('Table 4');
@@ -80,7 +80,7 @@ Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.Invoic
  insert into TableFood(Tables_Name) values ('Table 7');
  insert into TableFood(Tables_Name) values ('Table 8');
  insert into TableFood(Tables_Name) values ('Table 9');
- insert into TableFood(Tables_Name) values ('Table 10');
+ insert into TableFood(Tables_Name) values ('Table 10');*/
  
  insert into Category(Category_Name) values ('Meat');
  insert into Category(Category_Name) values ('Fish');
@@ -88,19 +88,17 @@ Invoice_details i inner join Items c on i.ItemsID_FK = c.Items_ID where i.Invoic
  insert into Category(Category_Name) values ('Tofu');
  insert into Category(Category_Name) values ('Drink');
  
- insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Rice', '5.0', '3');
+ /*insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Rice', '5.0', '3');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Fried Tofu', '10.0', '4');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Tofu In Tomato Sauce', '10.0', '4');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Fried Fish', '15.0', '2');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Stew Fish', '15.0', '2');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Stew Meat', '15.0', '1');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Sauteed Spinach', '5.0', '3');
- insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Fried Meat', '15.0', '1');
- insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Roast', '20.0', '1');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Sweet And Sour Ribs', '20.0', '1');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Pickles', '5.0', '3');
  insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Ice Tea', '3.0', '5');
- insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Soda', '10.0', '5');
+ insert into Items(Items_Name, Items_Price, CategoryID_FK) values ('Soda', '10.0', '5'); */
  
  /*insert into Invoices(Invoices_Date, TableID_FK, Invoices_Status) values(current_timestamp(), 1, 1);
  insert into Invoices(Invoices_Date, TableID_FK, Invoices_Status) values(current_timestamp(), 2, 2);
