@@ -1857,10 +1857,14 @@ namespace ConsoleApp
             Console.Clear();
             string status;
             string line = "┼────────────────────────────────────────────────┼";
+            string blank = "│                                                │";
             string title = "TABLES";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
+            Console.WriteLine(blank);
+            Console.WriteLine("│\t\tPOPULAR RICE SYSTEM\t\t │");
             Console.WriteLine("│{0," + position + "}\b{1}\t\t\t │", "", title);
+            Console.WriteLine(blank);
             Console.WriteLine(line);
             Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", "ID", "Name", "Status");
             Console.WriteLine(line);
