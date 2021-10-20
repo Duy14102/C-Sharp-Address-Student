@@ -62,7 +62,7 @@ namespace ConsoleApp
                     string[] menuItemsStaff = { "CREATE ORDER\t\t\t\t\t       │", "INVOICE\t\t\t\t\t\t       │", "HISTORY\t\t\t\t\t\t       │", "EXIT\t\t\t\t\t\t       │" };
                     do
                     {
-                        choice = Menu("POPULAR RICE SYSTEM", menuItemsStaff);
+                        choice = Menu("POPULAR RICE SYSTEM", "Staff Menu", menuItemsStaff);
                         switch (choice)
                         {
                             case 1:
@@ -84,7 +84,7 @@ namespace ConsoleApp
                     List<TableFood> tablesAdmin = new List<TableFood>();
                     do
                     {
-                        choice = Menu("POPULAR RICE SYSTEM", menuItemsAdmin);
+                        choice = Menu("POPULAR RICE SYSTEM", "Admin Menu", menuItemsAdmin);
                         switch (choice)
                         {
                             case 1:
@@ -1922,16 +1922,18 @@ namespace ConsoleApp
                 Console.WriteLine("┼───────────────────────────────┼");
             }
         }
-        static int Menu(string title, string[] menuItems)
+        static int Menu(string title, string role, string[] menuItems)
         {
             int choose = 0;
             string line = "┼──────────────────────────────────────────────────────────────┼";
+            string blank = "│\t\t\t\t\t\t\t       │";
             int position = line.Length / 2 - title.Length / 2;
             Console.Clear();
             Console.WriteLine(line);
-            Console.WriteLine("│\t\t\t\t\t\t\t       │");
+            Console.WriteLine(blank);
             Console.WriteLine("│{0," + position + "}\b{1}\t\t       │", "", title);
-            Console.WriteLine("│\t\t\t\t\t\t\t       │");
+            Console.WriteLine("│    {0," + position + "}\b{1}\t\t\t       │", "", role);
+            Console.WriteLine(blank);
             Console.WriteLine(line);
             for (int i = 0; i < menuItems.Length; i++)
             {
