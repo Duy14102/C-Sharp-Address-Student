@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Persistance;
 using BL;
+using System.Linq;
 
 namespace ConsoleApp
 {
@@ -483,7 +484,7 @@ namespace ConsoleApp
                     }
                     else
                     {
-                        DisplayItem(items);
+                        ShowPageItem(items);
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -807,7 +808,7 @@ namespace ConsoleApp
                     }
                     else
                     {
-                        DisplayTables(tableFoods);
+                        ShowPage(tableFoods);
                         Console.Write("Press any key to continue...");
                         Console.ReadKey();
                     }
@@ -846,9 +847,9 @@ namespace ConsoleApp
                 }
                 else
                 {
-                    DisplayTables(tablesStaff);
+                    ShowPage(tablesStaff);
                 }
-                Console.Write("Select a table to see details or input 0 to back to menu: ");
+                Console.Write("Select a table to create order or input 0 to back to menu: ");
                 choosetable = GetID();
                 if (choosetable == 0) break;
                 TableFood table = tableBL.GetById(choosetable);
@@ -905,10 +906,9 @@ namespace ConsoleApp
                             Console.ReadKey();
                             break;
                         }
-                        // DisplayItem(items);
                         while (true)
                         {
-                            DisplayItem(items);
+                            ShowPageItem(items);
                             Console.Write("Input ID to add dishes and input 0 to finish order : ");
                             choosedishes = GetID();
                             if (choosedishes == 0) break;
@@ -1857,6 +1857,7 @@ namespace ConsoleApp
             Console.Clear();
             string status;
             string line = "┼────────────────────────────────────────────────┼";
+            string lined = "┼──────────────────────────┼";
             string blank = "│                                                │";
             string title = "TABLES";
             int position = line.Length / 2 - title.Length / 2;
@@ -1874,6 +1875,10 @@ namespace ConsoleApp
                 Console.WriteLine("│ {0,-10} │ {1,-15} │ {2,-15} │", tables[i].TableId, tables[i].Name, status);
                 Console.WriteLine(line);
             }
+            Console.WriteLine("\t\t<───     ───>");
+            Console.WriteLine(lined);
+            Console.WriteLine("│Press '<───' to turn left │\n│Press '───>' to turn right│\n│Press 'esc' to escape     │");
+            Console.WriteLine(lined);
         }
         static void DisplayInvoice(List<Invoice> invoices)
         {
@@ -1959,6 +1964,7 @@ namespace ConsoleApp
         {
             Console.Clear();
             string line = "┼───────────────────────────────────────────────────────────────────────┼";
+            string lined = "┼──────────────────────────┼";
             string title = "MENU";
             int position = line.Length / 2 - title.Length / 2;
             Console.WriteLine(line);
@@ -1971,6 +1977,179 @@ namespace ConsoleApp
                 Console.WriteLine("│ {0,-10} │ {1,-20} │ {2,-15} │ {3, -15} │", items[i].ItemsID, items[i].ItemName, items[i].ItemPrice, items[i].CategoryInfo.CategoryName);
                 Console.WriteLine(line);
             }
+            Console.WriteLine("\t\t<───     ───>");
+            Console.WriteLine(lined);
+            Console.WriteLine("│Press '<───' to turn left │\n│Press '───>' to turn right│\n│Press 'esc' to escape     │");
+            Console.WriteLine(lined);
+        }
+        public static void ShowPage(List<TableFood> tableFoods)
+        {
+            int count = tableFoods.Count;
+            int max_page = (count % 10 == 0) ? (count % 10) : (count % 10 + 1); // lấy max page nếu count % 10 --> show / count thừa sẽ + dần
+            int[] index = new int[max_page];
+            string[] keywords = new string[] { "Escape", "LeftArrow", "RightArrow" }; // lấy keyword từ hàm GetChoice
+            index[0] = 0;
+            int current_page = 1;
+            string choice = string.Empty;
+            List<TableFood> foods = new List<TableFood>();
+            for (int i = 1; i < max_page; i++)
+            {
+                index[i] = 10 * i;
+            }
+            do
+            {
+                foods = new List<TableFood>();
+                for (int i = 0; i < 10; i++)
+                {
+                    if (current_page == max_page)
+                    {
+                        if (i == count - 10 * (max_page - 1))
+                        {
+                            break;
+                        }
+                    }
+                    foods.Add(tableFoods[index[current_page - 1] + i]);
+                }
+                DisplayTables(foods);
+                choice = GetChoice(keywords);
+                switch (choice)
+                {
+                    case "LeftArrow":
+                        // current_page--;
+                        if (current_page != 1)
+                        {
+                            current_page--;
+                        }
+                        break;
+                    case "RightArrow":
+                        // current_page++;
+                        if (current_page != max_page)
+                        {
+                            current_page++;
+                        }
+                        break;
+                    case "Escape":
+                        break;
+                    default:
+                        int id;
+                        //convert + check choice
+                        try
+                        {
+                            id = int.Parse(choice);
+                        }
+                        catch
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nInvalid input!");
+                            Console.ResetColor();
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        }
+                        // -> details
+                        break;
+
+                }
+            } while (choice != "Escape");
+        }
+        public static void ShowPageItem(List<Item> items)
+        {
+            int count = items.Count;
+            int max_page = (count % 10 == 0) ? (count % 10) : (count % 10 + 1); // lấy max page nếu count % 10 --> show / count thừa sẽ + dần
+            int[] index = new int[max_page];
+            string[] keywords = new string[] { "Escape", "LeftArrow", "RightArrow" }; // lấy keyword từ hàm GetChoice
+            index[0] = 0;
+            int current_page = 1;
+            string choice = string.Empty;
+            List<Item> items1 = new List<Item>();
+            for (int i = 1; i < max_page; i++)
+            {
+                index[i] = 10 * i;
+            }
+            do
+            {
+                items1 = new List<Item>();
+                for (int i = 0; i < 10; i++)
+                {
+                    if (current_page == max_page)
+                    {
+                        if (i == count - 10 * (max_page - 1))
+                        {
+                            break;
+                        }
+                    }
+                    items1.Add(items[index[current_page - 1] + i]);
+                }
+                DisplayItem(items1);
+                choice = GetChoice(keywords);
+                switch (choice)
+                {
+                    case "LeftArrow":
+                        // current_page--;
+                        if (current_page != 1)
+                        {
+                            current_page--;
+                        }
+                        break;
+                    case "RightArrow":
+                        // current_page++;
+                        if (current_page != max_page)
+                        {
+                            current_page++;
+                        }
+                        break;
+                    case "Escape":
+                        break;
+                    default:
+                        int id;
+                        //convert + check choice
+                        try
+                        {
+                            id = int.Parse(choice);
+                        }
+                        catch
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nInvalid input!");
+                            Console.ResetColor();
+                            Console.Write("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        }
+                        // -> details
+                        break;
+
+                }
+            } while (choice != "Escape");
+        }
+        public static string GetChoice(string[] keyword)
+        { // hiển thị yêu cầu lựa chọn, trả về key vừa nhập nếu nó thuộc một trong các keyword truyền vào
+            var result = string.Empty;
+            ConsoleKey key;
+            do
+            {
+                var keyInfo = Console.ReadKey(intercept: true);
+                key = keyInfo.Key;
+                if (key == ConsoleKey.Enter)
+                {
+                    break;
+                }
+                if (key == ConsoleKey.Backspace && result.Length > 0)
+                {
+                    Console.Write("\b \b");
+                    result = result[0..^1];
+                }
+                else if (keyword.Contains(key.ToString()))
+                {
+                    return key.ToString();
+                }
+                else if (!char.IsControl(keyInfo.KeyChar))
+                {
+                    result += keyInfo.KeyChar;
+                    Console.Write(keyInfo.KeyChar);
+                }
+            } while (key != ConsoleKey.Enter);
+            return result;
         }
         static int GetID()
         {
