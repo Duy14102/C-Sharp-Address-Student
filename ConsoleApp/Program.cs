@@ -324,8 +324,8 @@ namespace ConsoleApp
                                 Console.WriteLine("                │");
                                 Console.WriteLine("│                                              │");
                                 Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                Console.Write("Re-enter : ");
-                                getit = GetID();
+                                Console.Write("Press any key to continue...");
+                                Console.ReadKey();
                             }
                             else
                             {
@@ -626,8 +626,8 @@ namespace ConsoleApp
                                 Console.WriteLine("                │");
                                 Console.WriteLine("│                                              │");
                                 Console.WriteLine("┼──────────────────────────────────────────────┼");
-                                Console.Write("Re-enter : ");
-                                getit = GetID();
+                                Console.Write("Press any key to continue...");
+                                Console.ReadKey();
                             }
                             else if (tableFood.Status == 2)
                             {
