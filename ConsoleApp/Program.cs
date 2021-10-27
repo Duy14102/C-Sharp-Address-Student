@@ -2055,7 +2055,7 @@ namespace ConsoleApp
         public static void ShowPageItem(List<Item> items)
         {
             int count = items.Count;
-            int max_page = (count % 10 == 0) ? (count % 10) : (count % 10 + 1); // lấy max page nếu count % 10 --> show / count thừa sẽ + dần
+            int max_page = (count % 10 == 0) ? (count % 10) : (count % 10 + 1); // lấy max page nếu page % 10 hoặc page lẻ (vd : 11, 12) sẽ cộng thêm
             int[] index = new int[max_page];
             string[] keywords = new string[] { "Escape", "LeftArrow", "RightArrow" }; // lấy keyword từ hàm GetChoice
             index[0] = 0;
